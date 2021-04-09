@@ -1,7 +1,7 @@
 import React from 'react';
 import { Divider, Layout, Menu, PageHeader, Typography, Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { FaAdjust, FaBars } from "react-icons/fa";
+import { FaAdjust, FaBars, FaTimes } from "react-icons/fa";
 import { HeaderLayout, IButtonsTools } from '../global';
 
 export default function DefaultLayout() {
@@ -16,9 +16,10 @@ export default function DefaultLayout() {
     ]
 
     const firstButtonsTools: IButtonsTools[] = [
-        { icon: FaAdjust },
+        { icon: FaAdjust, class: "lite" },
+        { icon: FaTimes },
         { icon: FaBars },
-        { icon: FaBars },
+        { divider : "fr"}
     ]
 
     const centerButtonsTools: IButtonsTools[] = [
@@ -37,14 +38,23 @@ export default function DefaultLayout() {
     ]
 
     const setButton = (button: IButtonsTools, index: number) => {
-        return (
-            <Button type="text"
-                shape="circle"
-                size="small"
-                icon={<button.icon />}
-                key={index}
-            />
-        )
+        if ( button.divider ) {
+            return (
+                <Divider key={button.divider} type="vertical" />
+            )
+        } else if ( button.icon ) {
+            return (
+                <Button type="text"
+                    shape="circle"
+                    size="small"
+                    className={button.class}
+                    icon={<button.icon />}
+                    key={index}
+                />
+            )
+        } else if ( button.node ){
+            return button.node
+        }
     }
 
 
@@ -61,17 +71,18 @@ export default function DefaultLayout() {
         return (
             <PageHeader className={props.pageClass}>
                 <Row>
-                    <Col sm={props.smf}>{props.firstCol()}
-                    {props.div||0 ? <Divider key="d0" type="vertical" /> : (<></>)}</Col>
+                    <Col sm={props.smf}>{props.firstCol()}</Col>
+                    
                     {props.centerCol === undefined ? (<></>) : (
-                        <Col className="header-center"
-                            sm={props.smc}>{props.centerCol()}</Col>
+                    <Col className="header-center"
+                         sm={props.smc}>{props.centerCol()}</Col>
                     )}
+                    
                     {props.lastCol === undefined ? (<></>) : (
                         <Col className={rightClass.join(' ')}
                             xs={props.xsr} md={4}
                         >
-                            <Divider key="d1" type="vertical" />
+                            <Divider key="last" type="vertical" />
                             {props.lastCol()}
                         </Col>
                     )}

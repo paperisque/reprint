@@ -13,12 +13,24 @@ $action-header-padding:1px;
 
         .ant-page-header-content {
             padding-top: 0;
+
+            .ant-btn-circle.lite {
+                path {
+                    transform: rotate(45deg);
+                    transform-origin: center;
+                }
+            }
+
+            .ant-btn-circle.dark {
+                path {
+                    transform: rotate(215deg);
+                    transform-origin: center;
+                }
+            }
         }
 
-        .header-right {
-            .ant-divider {
-                height: 100%;
-            }
+        .ant-divider {
+            height: 100%;
         }
 
         .header-center{

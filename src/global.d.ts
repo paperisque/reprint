@@ -9,10 +9,12 @@ interface HeaderLayout {
     smf?: number,
     smc?: number,
     xsr?: number,
-    div?:boolean
 }
 
 interface IButtonsTools {
-    icon: IconType,
-    click?: (event: MouseEvent) => void
+    divider?: string,
+    icon?: IconType,
+    click?: (event: MouseEvent) => void,
+    class?:string,
+    node?:React.ReactFragment
 }
