@@ -43,6 +43,14 @@ const Routes: RouteType[] = [
         isSidemenu: true,
     },
     {
+        path: "/dashboard",
+        icon: AppstoreOutlined,
+        name: "",
+        component: Dashboard,
+        layout: "/dashboard",
+        isSidemenu: false,
+    },
+    {
         path: "/pages",
         name: "Pages",
         icon: FileOutlined,

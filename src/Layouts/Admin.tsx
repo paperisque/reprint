@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import { 
-    Layout
-} from 'antd';
-import { Route, Switch, RouteComponentProps, Redirect } from "react-router-dom";
+import React, { useState } from 'react'
+import { Layout, Menu } from 'antd';
+import { Route, Switch, Redirect } from "react-router-dom";
 import Routes from "../Routes";
 import AdminHeader from "../Components/Header/AdminHeader"
 import AdminFooter from "../Components/Footer/AdminFooter"
@@ -10,12 +8,13 @@ import Sidebar from "../Components/Sidebar/Sidebar"
 import { RouteType } from '../Models';
 const { Content } = Layout;
 
-export default class AdminLayout extends Component<RouteComponentProps> {
-    state = {
+const AdminLayout = ( props: any ) => {
+    
+    const [state, setState] = useState({
         collapsed: false,
-    };
+    });
 
-    getRoutes = (layoutRoutes: RouteType[]): null | any => {
+    const getRoutes = (layoutRoutes: RouteType[]): null | any => {
         return layoutRoutes.map((prop, key) => {
             // if a route doesn't have any subMenu and its layout is admin
             const propPath = prop.layout + prop.path;
@@ -48,12 +47,12 @@ export default class AdminLayout extends Component<RouteComponentProps> {
         });
     };
 
-    toggleCollapsed = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
+    const toggleCollapsed = () => {
+        setState({
+            collapsed: !state.collapsed,
         });
     };
-    getCurrentRouteText = (path: string, thisRoutes: RouteType[]): string => {
+    const getCurrentRouteText = (path: string, thisRoutes: RouteType[]): string => {
         for (let i = 0; i < thisRoutes.length; i += 1) {
             const menu = thisRoutes[i];
             if (path.includes(menu.layout + menu.path) && !menu.subMenu) {
@@ -70,23 +69,25 @@ export default class AdminLayout extends Component<RouteComponentProps> {
         }
         return "Brand";
     };
-    render() {
-        const {collapsed} = this.state;
-        return (
-            <React.Fragment>
-                <Layout>
-                    <Sidebar collapsed={collapsed} routes={Routes} />
-                    <Layout className="site-layout" style={{ marginLeft: collapsed ? 0 : 200 }}>
-                        <AdminHeader currentRouteText={this.getCurrentRouteText(this.props.location.pathname, Routes)} collapsed={collapsed} routes={Routes} toggleCollapsed={this.toggleCollapsed} />
-                        <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
-                            <div style={{ padding: 24, minHeight: 360 }}>
-                                <Switch>{this.getRoutes(Routes)}</Switch>
-                            </div>
-                        </Content>
-                        <AdminFooter />
-                    </Layout>
+    return (
+        <React.Fragment>
+            <Layout>
+                <Sidebar collapsed={state.collapsed} routes={Routes} />
+                <Menu mode="horizontal"></Menu>
+                <Layout className="site-layout" style={{ marginLeft: state.collapsed ? 0 : 200 }}>
+                    <AdminHeader currentRouteText={getCurrentRouteText(props.location.pathname, Routes)} 
+                                 collapsed={state.collapsed} routes={Routes} toggleCollapsed={toggleCollapsed} />
+                    <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
+                        <div style={{ padding: 24, minHeight: 360 }}>
+                            <Switch>{getRoutes(Routes)}</Switch>
+                        </div>
+                    </Content>
+                    <AdminFooter />
                 </Layout>
-            </React.Fragment>
-        )
-    }
+            </Layout>
+        </React.Fragment>
+    )
+
 }
+
+export default AdminLayout

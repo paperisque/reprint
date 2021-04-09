@@ -40,6 +40,9 @@ export default function Sidebar(props: SidebarPropsType) {
             return null;
         });
     }
+
+    const nodeRef = React.useRef(null)
+
     return (
         <Sider
             style={{
@@ -48,12 +51,13 @@ export default function Sidebar(props: SidebarPropsType) {
                 position: 'fixed',
                 left: 0,
             }}
-            breakpoint="sm"
+            breakpoint="lg"
             collapsedWidth="0"
             collapsible
             collapsed={props.collapsed}
             trigger={null}
             theme="light"
+            ref = {nodeRef}
         >
             <Image
                 className={props.collapsed ? "ml2 my2" : "ml3 pl2 my2"}
