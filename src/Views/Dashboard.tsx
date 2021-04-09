@@ -1,5 +1,3 @@
-import React from 'react'
-import { Bar } from 'react-chartjs-2'
 import moment from "moment";
 import { 
     Card, 
@@ -92,34 +90,7 @@ export default function Dashboard() {
             avatar: "https://i.pravatar.cc/150?img=40"
         },
     ];
-    const chartData = {
-        labels: ['Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-        datasets: [
-            {
-                label: 'Total Commits',
-                data: [35, 65, 33, 21, 57, 43, 13],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    }
+
     return (
         <Row gutter={[16, 16]}>
             <Col span={24}>
@@ -153,19 +124,6 @@ export default function Dashboard() {
                     <Col xs={24} sm={24} md={12}>
                         <Card bordered >
                             <div style={{ minHeight: "400px" }}>
-                                <Bar data={chartData} options={{
-                                    maintainAspectRatio: false,
-                                    responsive: true,
-                                    scales: {
-                                        yAxes: [
-                                            {
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                },
-                                            },
-                                        ],
-                                    },
-                                }} />
                             </div>
                         </Card>
                     </Col>

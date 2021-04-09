@@ -1,0 +1,22 @@
+$layout-background-color:transparent;
+$panel-background-color: #f0f2f5;
+
+.dashboard-layout{
+    background-color: $layout-background-color;
+}
+
+.dashboard-header{
+    background-color: $panel-background-color;
+    .dashboard-menu {
+        .ant-menu {
+            background-color:inherit;
+            .ant-menu-item {
+                &.ant-menu-item-selected {
+                    background-color: gray;
+                    a { color: white }
+                    
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,3 @@
-import React from 'react'
 import {AdminHeaderPropsType} from "../../Models"
 import {
     MenuFoldOutlined,
