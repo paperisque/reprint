@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaAdjust, FaBars } from "react-icons/fa";
 import { HeaderLayout, IButtonsTools } from '../global';
 import { useTranslation } from 'react-i18next';
-import firstButtonsTools from '../Components/Tools/Designs'
+import getTools from '../Components/Tools'
 
 export default function DefaultLayout() {
 
@@ -56,8 +56,8 @@ export default function DefaultLayout() {
     }
 
 
-    const selected = (): string[] => {
-        return [document.location.pathname]
+    const selected = (): string => {
+        return document.location.pathname
     }
 
     const header = (props: HeaderLayout) => {
@@ -102,7 +102,7 @@ export default function DefaultLayout() {
                             <Menu
                                 mode="horizontal"
                                 selectable
-                                selectedKeys={selected()}
+                                selectedKeys={[selected()]}
                             >{
                                     items.map(item => (
                                         <Menu.Item key={item.key}>
@@ -126,6 +126,9 @@ export default function DefaultLayout() {
                     smf: 5,
                     smc: 15,
                     firstCol: () => {
+
+                        const { firstButtonsTools } = getTools(selected())
+
                         return (
                             firstButtonsTools.map((button, index) => (
                                 setButton(button, index)

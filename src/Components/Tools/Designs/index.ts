@@ -2,11 +2,10 @@ import { IButtonsTools } from "../../../global";
 import Themer from "../Themer";
 import DesignsMode from './DesignsMode';
 
-
-const firstButtonsTools: IButtonsTools[] = [
+export const firstButtonsDesignTools: IButtonsTools[] = [
     { node: Themer },
-    { icon: DesignsMode },
+    { node: DesignsMode },
     { divider : "fr"},
-]
+] 
 
-export default firstButtonsTools
+ 

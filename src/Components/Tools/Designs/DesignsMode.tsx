@@ -2,7 +2,7 @@
 import { Button } from "antd"
 import { useState } from "react";
 import { FaBars, FaSitemap } from "react-icons/fa";
-import { BaseButtonProps } from "antd/lib/button/button";
+import classname from 'classnames'
 
 export default function DesignsMode() {
     const [mode, setMode] = useState(false)
@@ -14,19 +14,15 @@ export default function DesignsMode() {
         })
     }
 
-    //const Icon:React.ReactNode = mode ? <FaBars/> : <FaSitemap/>;
-    
-    const buttonsProps:BaseButtonProps = {
-        className:"design-mode-btn",
-        type:"text", 
-        shape:"circle",
-        size:"small", 
-        icon:FaBars
-    }
-
     return (
-        <Button key="mode" {...buttonsProps}
-                onClick={handleMode}
-        />
-    )
+        <Button key="mode" 
+            onClick={handleMode}        
+            className={classname({'design-listmode': mode})}
+            type="text"
+            shape="circle"
+            size="small">{mode ? 
+           <FaSitemap/> : 
+           <FaBars/>}
+        </Button>
+    ) 
 }

@@ -36,6 +36,11 @@ $action-header-padding:1px;
         .ant-btn svg {
             transform: translate(0px, 1px);
         }
+
+        .design-listmode {
+            transform: rotate(270deg);
+            transform-origin: center;
+        }
     }
 
     .dashboard-menu {
