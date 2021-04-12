@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import { IconType } from 'react-icons';
 
 interface HeaderLayout {
@@ -14,7 +15,7 @@ interface HeaderLayout {
 interface IButtonsTools {
     divider?: string,
     icon?: IconType,
-    click?: (event: MouseEvent) => void,
+    click?: (event: any) => void,
     class?:string,
-    node?:React.ReactFragment
+    node?: () => React.ReactNode
 }

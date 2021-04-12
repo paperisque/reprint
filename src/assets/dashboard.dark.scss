@@ -1,7 +1,10 @@
 $layout-background-color:transparent;
-$panel-background-color: #f0f2f5;
+$primar-dark-background: #4e4e4e;
+$panel-background-color: #868686;
 
-#themes-container.lite {
+#themes-container.dark {
+
+    background-color: $primar-dark-background;
 
     .dashboard-layout {
         background-color: $layout-background-color;
@@ -14,10 +17,18 @@ $panel-background-color: #f0f2f5;
             
             .themer-btn {
                 path {
-                    transform: rotate(45deg);
+                    transform: rotate(215deg);
                     transform-origin: center;
                 }
             }
+        }
+
+        .ant-btn-text {
+            color: white;
+        }
+
+        .ant-divider {
+            border-color: rgb(158, 158, 158);
         }
 
         .dashboard-menu {
@@ -25,11 +36,14 @@ $panel-background-color: #f0f2f5;
                 background-color: inherit;
 
                 .ant-menu-item {
+                    a {
+                        color: white;
+                    }
                     &.ant-menu-item-selected {
-                        background-color: gray;
+                        background-color: rgb(218, 218, 218);
 
                         a {
-                            color: white
+                            color: rgb(59, 59, 59)
                         }
 
                     }

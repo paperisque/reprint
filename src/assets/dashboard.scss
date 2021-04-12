@@ -3,6 +3,13 @@ $line-height-menu: 46px;
 $icons-panel-header: 20px;
 $action-header-padding:1px;
 
+#application { 
+    height: inherit; 
+    #themes-container {
+        height: inherit;
+    }
+}
+
 .dashboard-header {
     height: auto;
 
@@ -13,32 +20,24 @@ $action-header-padding:1px;
 
         .ant-page-header-content {
             padding-top: 0;
-
-            .ant-btn-circle.lite {
-                path {
-                    transform: rotate(45deg);
-                    transform-origin: center;
-                }
-            }
-
-            .ant-btn-circle.dark {
-                path {
-                    transform: rotate(215deg);
-                    transform-origin: center;
-                }
-            }
         }
 
         .ant-divider {
             height: 100%;
         }
 
-        .header-center{
+        .header-center {
             text-align: right;
         }
 
     }
-    
+
+    .dashboard-tools {
+        .ant-btn svg {
+            transform: translate(0px, 1px);
+        }
+    }
+
     .dashboard-menu {
         &.ant-page-header {
             padding-top: 0;
@@ -47,8 +46,8 @@ $action-header-padding:1px;
         }
 
         .ant-menu {
-            
-            border-bottom-width:0;
+
+            border-bottom-width: 0;
             line-height: $line-height-menu;
 
             .ant-menu-item {

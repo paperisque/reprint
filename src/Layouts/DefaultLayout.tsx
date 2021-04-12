@@ -1,25 +1,22 @@
 import React from 'react';
 import { Divider, Layout, Menu, PageHeader, Typography, Row, Col, Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { FaAdjust, FaBars, FaTimes } from "react-icons/fa";
+import { FaAdjust, FaBars } from "react-icons/fa";
 import { HeaderLayout, IButtonsTools } from '../global';
+import { useTranslation } from 'react-i18next';
+import firstButtonsTools from '../Components/Tools/Designs'
 
 export default function DefaultLayout() {
 
-    const items = [
-        { key: '/dashboard/fonts', title: 'Schriften' },
-        { key: "/dashboard/langs", title: 'Sprachen' },
-        { key: "/dashboard/images", title: 'Bildcollectionen' },
-        { key: "/dashboard/formats", title: 'Textformatierungen' },
-        { key: "/dashboard/blocks", title: 'Blockformatierungen' },
-        { key: "/dashboard/designs", title: 'Druckvorlagen' }
-    ]
+    const { t } = useTranslation()
 
-    const firstButtonsTools: IButtonsTools[] = [
-        { icon: FaAdjust, class: "lite" },
-        { icon: FaTimes },
-        { icon: FaBars },
-        { divider : "fr"}
+    const items = [
+        { key: '/dashboard/fonts', title: t('Fonts') },
+        { key: "/dashboard/langs", title: t('Language') },
+        { key: "/dashboard/images", title: t('Image Collection') },
+        { key: "/dashboard/formats", title: t('Text formatting') },
+        { key: "/dashboard/blocks", title: t('Block formatting') },
+        { key: "/dashboard/designs", title: t('Print templates') }
     ]
 
     const centerButtonsTools: IButtonsTools[] = [
@@ -50,10 +47,11 @@ export default function DefaultLayout() {
                     className={button.class}
                     icon={<button.icon />}
                     key={index}
+                    onClick={button.click}
                 />
             )
         } else if ( button.node ){
-            return button.node
+            return button.node()
         }
     }
 
