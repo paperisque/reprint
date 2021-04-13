@@ -4,5 +4,8 @@
     "Image Collection" : "Bildcollectionen",
     "Text formatting" : "Textformatierungen",
     "Block formatting" : "Blockformatierungen",
-    "Print templates" : "Druckvorlagen"
+    "Print templates" : "Druckvorlagen",
+
+    "Switch to list view": "Zur Listenansicht wechseln",
+    "Switch to level view": "Zur Ebenenansicht wechseln"
 }

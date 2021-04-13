@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import { Route, Switch, Redirect } from "react-router-dom";
 import Routes from "../Routes";
-import AdminHeader from "../Components/Header/AdminHeader"
-import AdminFooter from "../Components/Footer/AdminFooter"
-import Sidebar from "../Components/Sidebar/Sidebar"
+import AdminHeader from "../Components/Demo/Header/AdminHeader"
+import AdminFooter from "../Components/Demo/Footer/AdminFooter"
+import Sidebar from "../Components/Demo/Sidebar/Sidebar"
 import { RouteType } from '../Models';
 const { Content } = Layout;
 
@@ -73,7 +73,6 @@ const AdminLayout = ( props: any ) => {
         <React.Fragment>
             <Layout>
                 <Sidebar collapsed={state.collapsed} routes={Routes} />
-                <Menu mode="horizontal"></Menu>
                 <Layout className="site-layout" style={{ marginLeft: state.collapsed ? 0 : 200 }}>
                     <AdminHeader currentRouteText={getCurrentRouteText(props.location.pathname, Routes)} 
                                  collapsed={state.collapsed} routes={Routes} toggleCollapsed={toggleCollapsed} />

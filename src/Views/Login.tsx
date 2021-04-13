@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button, Checkbox, Card, Image } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link} from "react-router-dom"
-import Logo from "../../assets/antd.png"
+import Logo from "../assets/antd.png"
 export default function Login() {
     return (
         <Card id="auth-card">

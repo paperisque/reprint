@@ -1,5 +1,5 @@
 import React from 'react'
-import { SidebarPropsType } from "../../Models"
+import { SidebarPropsType } from "../../../Models"
 import {
     Layout,
     Image,
@@ -7,7 +7,7 @@ import {
 } from "antd"
 import { Link } from "react-router-dom";
 
-import Logo from "../../assets/antd.png";
+import Logo from "../../../assets/antd.png"
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 

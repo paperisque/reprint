@@ -1,10 +1,10 @@
 //import { useState } from 'react'
 import { Button } from "antd"
 import { FaAdjust } from "react-icons/fa";
-import { useTheme } from '../../hooks/useTheme';
+import { useActions } from '../../hooks';
 
 export default function Themer(){
-    const { themeActions } = useTheme()
+    const { themeActions } = useActions()
 
     return (
         <Button

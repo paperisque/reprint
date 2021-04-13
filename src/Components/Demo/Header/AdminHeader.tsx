@@ -1,4 +1,4 @@
-import {AdminHeaderPropsType} from "../../Models"
+import {AdminHeaderPropsType} from "../../../Models"
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined

@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import AdminLayout from "./Layouts/Admin";
 import AuthLayout from "./Layouts/Auth";
-import DefaultLayout from './Layouts/DefaultLayout';
+import Dashboard from './Layouts/Dashboard';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                 <Switch>
                     <Route path="/admin" component={AdminLayout} />
                     <Route path="/auth" component={AuthLayout} />
-                    <Route path="/dashboard" component={DefaultLayout} />
+                    <Route path="/dashboard" component={Dashboard} />
                     <Redirect from="/" to="/dashboard" />
                 </Switch>
             </BrowserRouter>

@@ -14,21 +14,21 @@ import {
 // type for route
 import {RouteType} from "./Models"
 // About
-import About from "./Views/About";
-// Dashboard
-import Dashboard from "./Views/Dashboard";
+import About from "./Views/Demo/Pages/About";
+// DemoBoard
+import DemoBoard from "./Views/Demo/Demoboard";
 // Pages
-import BlankPage from "./Views/Pages/BlankPage";
-import Page404 from "./Views/Pages/Page404";
-import Page403 from "./Views/Pages/Page403";
-import Page500 from "./Views/Pages/Page500";
-import Login from "./Views/Pages/Login"
+import BlankPage from "./Views/Demo/Pages/BlankPage";
+import Page404 from "./Views/Demo/Pages/Page404";
+import Page403 from "./Views/Demo/Pages/Page403";
+import Page500 from "./Views/Demo/Pages/Page500";
+import Login from "./Views/Login"
 const Routes: RouteType[] = [
     // Default 404 Not Found Page
     
     {
         path: "/error/404",
-        name: "Dashboard",
+        name: "DemoBoard",
         icon: AppstoreOutlined,
         component: Page404,
         layout: "/admin",
@@ -36,25 +36,25 @@ const Routes: RouteType[] = [
     },
     {
         path: "/index",
-        name: "Dashboard",
+        name: "DemoBoard",
         icon: AppstoreOutlined,
-        component: Dashboard,
+        component: DemoBoard,
         layout: "/admin",
         isSidemenu: true,
     },
     {
-        path: "/dashboard",
+        path: "/DemoBoard",
         icon: AppstoreOutlined,
         name: "",
-        component: Dashboard,
-        layout: "/dashboard",
+        component: DemoBoard,
+        layout: "/DemoBoard",
         isSidemenu: false,
     },
     {
         path: "/pages",
         name: "Pages",
         icon: FileOutlined,
-        component: Dashboard,
+        component: DemoBoard,
         layout: "/admin",
         isSidemenu: true,
         subMenu: [

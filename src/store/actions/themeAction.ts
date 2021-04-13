@@ -1,6 +1,6 @@
 import { ThemeActionTypes, TThemeAction } from '../../types/themes';
 import { Dispatch } from 'redux';
-import { AppState } from '../reducers';
+import { AppState } from '../';
 
 export const themeActions = () => {
     

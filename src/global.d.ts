@@ -1,5 +1,6 @@
-import { MouseEventHandler } from 'react';
+import { MouseEvent } from 'react';
 import { IconType } from 'react-icons';
+import React from 'react';
 
 interface HeaderLayout {
     pageClass: string,
@@ -14,8 +15,15 @@ interface HeaderLayout {
 
 interface IButtonsTools {
     divider?: string,
+    title?: string,
     icon?: IconType,
-    click?: (event: any) => void,
+    click?: (event: MouseEvent) => void,
     class?:string,
     node?: () => React.ReactNode
+}
+
+interface IDashboardRoute {
+    key: string,
+    title: string,
+    view: React.ReactElement
 }

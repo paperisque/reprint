@@ -4,7 +4,7 @@ import DesignsMode from './DesignsMode';
 
 export const firstButtonsDesignTools: IButtonsTools[] = [
     { node: Themer },
-    { node: DesignsMode },
+    { node: DesignsMode, },
     { divider : "fr"},
 ] 
 

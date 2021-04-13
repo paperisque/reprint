@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'antd';
 import { Route, Switch } from "react-router-dom";
 import Routes from "../Routes";
-import AdminFooter from "../Components/Footer/AdminFooter"
+import AdminFooter from "../Components/Demo/Footer/AdminFooter"
 import { RouteType } from '../Models';
 const { Content } = Layout;
 

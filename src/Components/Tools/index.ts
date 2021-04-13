@@ -6,9 +6,14 @@ interface IButtonsBlockTools {
     firstButtonsTools:IButtonsTools[]
 }
 
-export default function getTools(key:string):IButtonsBlockTools {
+export const selectedLocation = (): string => {
+    return document.location.pathname
+}
 
-    switch( key ) {
+
+export default function useTools():IButtonsBlockTools {
+
+    switch( selectedLocation() ) {
         
         case '/dashboard/designs': return {
             firstButtonsTools : firstButtonsDesignTools
