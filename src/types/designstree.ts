@@ -1,8 +1,8 @@
 export enum DesignsActionTypes {
-    DESIGNS_GET_FETCH   = 'DESIGNS_GET_FETCH',
-    DESIGNS_GET_SUCCESS = 'DESIGNS_GET_SUCCESS',
-    DESIGNS_GET_ERROR   = 'DESIGNS_GET_ERROR',
-    DESIGNS_EXPAND   = 'DESIGNS_EXPAND'
+    DESIGN_TREE_FETCH   = 'DESIGN_TREE/FETCH',
+    DESIGN_TREE_SUCCESS = 'DESIGN_TREE/SUCCESS',
+    DESIGN_TREE_ERROR   = 'DESIGN_TREE/ERROR',
+    DESIGN_TREE_EXPAND  = 'DESIGN_TREE/EXPAND'
 }
 
 export interface IDesignsElement {
@@ -44,26 +44,26 @@ export interface IDesignsTree {
 export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
-    collapsed: number[],
+    expand: number[],
     data : IDesignsTree | {},
 }
 
 export interface IDesignsTreeFetch {
-    type : DesignsActionTypes.DESIGNS_GET_ERROR,
+    type : DesignsActionTypes.DESIGN_TREE_FETCH,
 }
 
 export interface IDesignsTreeSuccess {
-    type : DesignsActionTypes.DESIGNS_GET_SUCCESS,
+    type : DesignsActionTypes.DESIGN_TREE_SUCCESS,
     payload : IDesignsTree
 }
 
 export interface IDesignsTreeError {
-    type : DesignsActionTypes.DESIGNS_GET_ERROR,
+    type : DesignsActionTypes.DESIGN_TREE_ERROR,
     payload : string
 }
 
 export interface IDesignsTreeExpand {
-    type : DesignsActionTypes.DESIGNS_EXPAND,
+    type : DesignsActionTypes.DESIGN_TREE_EXPAND,
     expand : number
 }
 

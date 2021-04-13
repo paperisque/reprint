@@ -1,10 +1,9 @@
-import {
-    Card
-} from "antd"
+import { Layout } from 'antd'
+
 export default function Blank() {
     return (
-        <Card>
-            <h1>Blank Page</h1>
-        </Card>
+        <Layout.Content style={{ textAlign: 'center' }}>
+            <h1>Under Construction</h1>
+        </Layout.Content>
     )
 }

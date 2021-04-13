@@ -4,7 +4,8 @@ import { ButtonsHeader, HeaderDashboard } from "../Components/Tools/Header"
 import { IButtonsTools } from "../global"
 import getTools from '../Components/Tools/index';
 import React, { useEffect } from "react";
-import { useActions } from '../hooks/index';
+import { useAppDispatch } from '../hooks';
+import { designsTreeAsync } from "../store/reducers/sliceDesignsTree";
 
 const centerButtonsTools: IButtonsTools[] = [
     { icon: FaAdjust },
@@ -18,16 +19,13 @@ const lastButtonsTools: IButtonsTools[] = [
     { icon: FaAdjust },
 ]
 
-const { firstButtonsTools } = getTools()
-
 export default function Designs() {
 
-    const { designsTreeActions } = useActions()
+    const { firstButtonsTools } = getTools()
+    
+    const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        designsTreeActions()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    useEffect(() => { dispatch(designsTreeAsync()) }, [dispatch])
 
     return (
         <React.Fragment>

@@ -5,30 +5,28 @@ import { IDesignsTreeState, DesignsActionTypes } from '../../types/designstree'
 const initialState: IDesignsTreeState = {
     isLoading: false,
     isError: null,
-    collapsed : [],
+    expand : [],
     data: {}
 };
 
-const reducerName = 'designstree';
-
 export const designsTreeAsync = createAsyncThunk(
-    reducerName + '/' + DesignsActionTypes.DESIGNS_GET_FETCH,
+    DesignsActionTypes.DESIGN_TREE_FETCH,
     async () => await fetch('/api/antd/tree').then( responce => responce.json()) 
 )
   
 
 export const designsTreeSlice = createSlice({
-    name: reducerName,
+    name: 'DESIGN_TREE',
     initialState : initialState,
     reducers: {
-        collapsed: (state, action: PayloadAction<number>) => {
-            state.collapsed.push( action.payload )
+        expand: (state, action: PayloadAction<number>) => {
+            state.expand.push( action.payload )
         }
     },
 
-    extraReducers: (builder) => {
-        builder
-          .addCase( designsTreeAsync.pending, (state:IDesignsTreeState) => {
+    extraReducers: AB => { 
+        
+        AB.addCase( designsTreeAsync.pending, (state:IDesignsTreeState) => {
             state.isLoading = true
         
         }).addCase( designsTreeAsync.fulfilled, (state:IDesignsTreeState, action) => {
@@ -43,6 +41,6 @@ export const designsTreeSlice = createSlice({
     }
 })
 
-export const { collapsed } = designsTreeSlice.actions;
+export const { expand } = designsTreeSlice.actions;
 
 export default designsTreeSlice.reducer;
