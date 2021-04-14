@@ -60,7 +60,7 @@ export default function Designs() {
                 })}
             </Layout.Header>
             <Layout.Content>
-
+                
             </Layout.Content>
         </React.Fragment>
 
