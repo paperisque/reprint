@@ -1,20 +1,28 @@
-import Tree, { useTreeState } from 'react-hyper-tree'
-import { useTypedSelector } from '../../hooks/useTypedSelector'
-import { selectTreeData } from '../../store/reducers/sliceDesignsTree'
+///import Tree, { useTreeState } from 'react-hyper-tree'
+import { IDesignsTree } from '../../types/designstree';
 
-export default function DesignsTree(){
+interface DesignsTreeProps {
+  datatree: IDesignsTree | {}
+}
 
-    const datatree = useTypedSelector(selectTreeData)
-     
+export default function DesignsTree(props: DesignsTreeProps){
+
+    console.log(props);
+
+    return (
+      <></>
+    )
+/* 
     const { required, handlers } = useTreeState({
-        data:datatree,
+        data: props.datatree,
         id: 'your_tree_id_000',
     })
     
-      return (
-        <Tree
-          {...required}
-          {...handlers}
-        />
-      )
+    return (
+      <Tree
+        {...required}
+        {...handlers}
+      />
+    )
+     */
 }

@@ -5,7 +5,9 @@ import { IButtonsTools } from "../global"
 import getTools from '../Components/Tools/index';
 import React, { useEffect } from "react";
 import { useAppDispatch } from '../hooks';
-import { designsTreeAsync } from "../store/reducers/sliceDesignsTree";
+import { designsTreeAsync, selectTreeData } from "../store/reducers/sliceDesignsTree";
+import DesignsTree from "../Components/Designs/DesignsTree";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 const centerButtonsTools: IButtonsTools[] = [
     { icon: FaAdjust },
@@ -22,10 +24,13 @@ const lastButtonsTools: IButtonsTools[] = [
 export default function Designs() {
 
     const { firstButtonsTools } = getTools()
-    
     const dispatch = useAppDispatch()
 
-    useEffect(() => { dispatch(designsTreeAsync()) }, [dispatch])
+    useEffect(() => { 
+        dispatch( designsTreeAsync()) }, 
+    [dispatch])
+
+    const datatree = useTypedSelector(selectTreeData)
 
     return (
         <React.Fragment>
@@ -60,7 +65,7 @@ export default function Designs() {
                 })}
             </Layout.Header>
             <Layout.Content>
-                
+                <DesignsTree datatree={datatree} />
             </Layout.Content>
         </React.Fragment>
 
