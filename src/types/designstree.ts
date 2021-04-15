@@ -9,6 +9,7 @@ export interface IDesignsElement {
     id: number
     idx : number,
     gd: number,
+    ins: string,
     position: number,
     name:string,
     active:number,
@@ -45,7 +46,7 @@ export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
     expand: number[],
-    data : IDesignsTree | {},
+    data : IDesignsTree | null,
 }
 
 export interface IDesignsTreeFetch {

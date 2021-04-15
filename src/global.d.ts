@@ -27,3 +27,12 @@ interface IDashboardRoute {
     title: string,
     view: React.ReactElement
 }
+
+export interface IDesignTreeNode {
+    readonly id: number | string;
+    data?: IData;
+    name: string;
+    opened?: boolean,
+    options?: IDataOptions;
+    children?: ITreeNode[];
+}

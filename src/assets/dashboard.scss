@@ -2,9 +2,11 @@ $padding-vertical: 6px;
 $line-height-menu: 46px;
 $icons-panel-header: 20px;
 $action-header-padding:1px;
+$layout-padding:3vw;
 
-#application { 
-    height: inherit; 
+#application {
+    height: inherit;
+
     #themes-container {
         height: inherit;
     }
@@ -12,11 +14,11 @@ $action-header-padding:1px;
 
 .dashboard-header {
     height: auto;
+    padding: 0 $layout-padding;
 
     .ant-page-header {
 
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0;
 
         .ant-page-header-content {
             padding-top: 0;
@@ -32,7 +34,12 @@ $action-header-padding:1px;
 
     }
 
-    .dashboard-tools {
+    &.dashboard-tools {
+
+        margin-top: 10px;
+        padding-top: $action-header-padding;
+        padding-bottom: $action-header-padding;
+
         .ant-btn svg {
             transform: translate(0px, 1px);
         }
@@ -45,7 +52,6 @@ $action-header-padding:1px;
 
     .dashboard-menu {
         &.ant-page-header {
-            padding-top: 0;
             padding-bottom: $padding-vertical;
             width: 100%;
         }
@@ -71,11 +77,46 @@ $action-header-padding:1px;
             }
         }
     }
+}
 
-    &.dashboard-content {
-        margin-top: 10px;
-        padding-top: $action-header-padding;
-        padding-bottom: $action-header-padding;
+.dashboard-content {
+    padding: 0 $layout-padding;
+    margin: 5px 5px;
+
+}
+
+.designTreeWrapper {
+
+    .designParentChildren {
+        clear: both;
+
+        >div {
+            float: left;
+        }
     }
+
+    .designParentChildren>[class^="hyperNodeWrapper"] {
+
+        &[undefined] {
+            [class^="hyperNode"] {
+                cursor: default;
+            }
+        }
+
+        width: 200px;
+        margin-right: 20px;
+
+        >div {
+            width: auto;
+        }
+    }
+
+    [class*="dragZoneItemSelected"] {
+        background-color: rgba(58, 153, 74, 0.842);
+        border: 1px solid black;
+
+    }
+
+
 
 }

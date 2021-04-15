@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IDesignsTreeState, DesignsActionTypes } from '../../types/designstree'
+import { IDesignsTreeState, DesignsActionTypes } from '../../types/designstree';
 import { AppState/* , AppThunk */ } from '../';
 import api from '../../api'
 
@@ -7,7 +7,7 @@ const initialState: IDesignsTreeState = {
     isLoading: false,
     isError: null,
     expand : [],
-    data: {}
+    data: null 
 };
 
 export const slicename: string = 'designstree';
@@ -43,7 +43,7 @@ export const designsTreeSlice = createSlice({
         }).addCase( designsTreeAsync.rejected, (state:IDesignsTreeState, action) => {
             state.isLoading = false
             state.isError = action.payload as string
-            state.data = []
+            state.data = null
             console.log('Error: ', action)
         })
     }

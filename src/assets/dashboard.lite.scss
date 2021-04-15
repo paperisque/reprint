@@ -10,7 +10,7 @@ $panel-background-color: #f0f2f5;
     .dashboard-header {
         background-color: $panel-background-color;
 
-        .dashboard-tools {
+        &.dashboard-tools {
             
             .themer-btn {
                 path {
