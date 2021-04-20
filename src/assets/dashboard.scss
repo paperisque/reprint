@@ -120,3 +120,29 @@ $layout-padding:3vw;
 
 
 }
+
+.ant-tree .ant-tree-node-content-wrapper{
+    padding: 0;
+}
+
+.designs-node {
+    padding-left: 4px;
+    position: relative;
+    border: 2px solid #aaa;
+
+    .designs-node-tools {
+        float: right;
+        padding: 2px 6px 0;
+
+        .design-active{
+            color: green;
+        }
+        .design-passive{
+            color: red;
+        }
+        .design-removed{
+            color: grey;
+        }
+    }
+}
+

@@ -1,16 +1,15 @@
 import { Layout } from "antd"
 import { FaAdjust, FaBars } from "react-icons/fa"
 import { ButtonsHeader, HeaderDashboard } from "../Components/Tools/Header"
-import { IButtonsTools, IDesignTreeNode } from "../global"
+import { IButtonsTools } from '../global';
 import getTools from '../Components/Tools/index';
 import React, { useEffect } from "react";
 import { useAppDispatch } from '../hooks';
-import { designsTreeAsync, selectTreeData } from "../store/reducers/sliceDesignsTree";
-import DesignsTree from "../Components/Designs/DesignsTree";
+import { designsTreeAsync, selectTreeDesign, selectTreeExpanded } from "../store/reducers/sliceDesignsTree";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { IDesignsContainer, IDesignsItem } from "../types/designstree";
-//import { ITreeNode } from 'react-hyper-tree/dist/helpers/node';
+import DesignsTreeAntd from "../Components/Designs/DesignsTreeAntd";
 //import { nanoid } from "@reduxjs/toolkit";
+
 
 const centerButtonsTools: IButtonsTools[] = [
     { icon: FaAdjust },
@@ -23,7 +22,7 @@ const lastButtonsTools: IButtonsTools[] = [
     { icon: FaAdjust },
     { icon: FaAdjust },
 ]
-
+/*
 const MapDateTree = ( 
     inputTree: IDesignsContainer[] | IDesignsItem[] | undefined ) => {
     
@@ -56,16 +55,19 @@ const MapDateTree = (
 
     return __container
 }
+*/
+
 
 export default function Designs() {
 
     const { firstButtonsTools } = getTools()
+
     const dispatch = useAppDispatch()
 
     useEffect(() => { dispatch(designsTreeAsync()) }, [dispatch])
 
-    const inputTree = useTypedSelector(selectTreeData)
-    const treeData: Array<IDesignTreeNode> = MapDateTree(inputTree?.tree)
+    const inputData = useTypedSelector(selectTreeDesign)
+    const inputExpanded = useTypedSelector(selectTreeExpanded)
 
     return (
         <React.Fragment>
@@ -99,9 +101,14 @@ export default function Designs() {
 
                 })}
             </Layout.Header>
-            <Layout.Content className="dashboard-content">
-                <DesignsTree treeData={treeData} />
-            </Layout.Content>
+            { inputData?.length && (
+                <Layout.Content className="dashboard-content">
+                    <DesignsTreeAntd
+                        treeData={inputData}
+                        expanded={inputExpanded}
+                    />
+                </Layout.Content>
+            )}
         </React.Fragment>
 
     )

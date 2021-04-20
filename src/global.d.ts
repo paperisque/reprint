@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import { IconType } from 'react-icons';
 import React from 'react';
 
@@ -28,11 +28,22 @@ interface IDashboardRoute {
     view: React.ReactElement
 }
 
-export interface IDesignTreeNode {
+export interface IDesignTreeNodeOld {
     readonly id: number | string;
     data?: IData;
     name: string;
     opened?: boolean,
     options?: IDataOptions;
     children?: ITreeNode[];
+}
+export interface IDesignTreeNode {
+    key: string;
+    active: number,
+    title: ReactNode | string;
+    isLeaf?: boolean,
+    element?: any;
+    isParent?: boolean;
+    isChild?: boolean;
+    expanded?: boolean,
+    children?: IDesignTreeNode[];
 }

@@ -1,3 +1,6 @@
+import { Key } from "react";
+import { IDesignTreeNode } from "../global";
+
 export enum DesignsActionTypes {
     DESIGN_TREE_FETCH   = 'DESIGN_TREE_FETCH',
     DESIGN_TREE_SUCCESS = 'DESIGN_TREE_SUCCESS',
@@ -12,7 +15,7 @@ export interface IDesignsElement {
     ins: string,
     position: number,
     name:string,
-    active:number,
+    activ:number,
 }
 
 export interface IDesignsGroup extends IDesignsElement {
@@ -45,8 +48,9 @@ export interface IDesignsTree {
 export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
-    expand: number[],
-    data : IDesignsTree | null,
+    expanded: Key[],
+    origen?: IDesignsTree, 
+    designs?: IDesignTreeNode[],
 }
 
 export interface IDesignsTreeFetch {
