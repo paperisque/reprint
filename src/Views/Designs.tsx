@@ -14,7 +14,6 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import DesignsTreeAntd from "../Components/Designs/DesignsTreeAntd";
 import { useActions } from '../hooks/index';
 
-
 const lastButtonsTools: IButtonsTools[] = [
     { icon: FaCreditCard },
     { icon: FaAdjust },
@@ -43,10 +42,10 @@ export default function Designs() {
 
     const { firstButtonsTools, centerButtonsTools } = getTools()
 
-
     return (
         <React.Fragment>
-            <Layout.Header className="dashboard-header dashboard-tools">
+            <Layout.Header 
+                className="dashboard-header dashboard-tools">
                 {HeaderDashboard({
                     pageClass: "",
                     smf: 5,
@@ -77,6 +76,7 @@ export default function Designs() {
             </Layout.Header>
 
             <Layout.Content className="dashboard-content">
+              
                 {inputData?.length ? (
                     <DesignsTreeAntd
                         treeData={inputData}
@@ -84,6 +84,7 @@ export default function Designs() {
                         setSelected={onSelection}
                     />
                 ) : <Spin className="dashboard-content-loader" />}
+                                               
             </Layout.Content>
 
         </React.Fragment>

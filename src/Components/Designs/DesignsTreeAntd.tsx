@@ -54,7 +54,7 @@ export default function DesignsTreeAntd({
     ) : (
         <PrimeTree 
             value={primeData}
-            selectionMode="multiple"
+            selectionMode="single"
             expandedKeys={expandedPrime}
             nodeTemplate={DesignsNodeTitle}
             onToggle={( e ) => {

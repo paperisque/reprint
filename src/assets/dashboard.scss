@@ -81,7 +81,12 @@ $layout-padding:3vw;
 
 .dashboard-content {
     padding: 0 $layout-padding;
-    margin: 5px 5px;
+    margin: 0;
+    height: calc(100% - 100px);
+    overflow-x: hidden;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
     
     .dashboard-content-loader {
         text-align: center;
