@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode } from 'react';
+import { ReactNode, MouseEvent, Key } from 'react';
 import { IconType } from 'react-icons';
 import React from 'react';
 
@@ -20,6 +20,7 @@ interface IButtonsTools {
     click?: (event: MouseEvent) => void,
     class?:string,
     node?: () => React.ReactNode
+    disabled?:boolean
 }
 
 interface IDashboardRoute {
@@ -47,3 +48,26 @@ export interface IDesignTreeNode {
     expanded?: boolean,
     children?: IDesignTreeNode[];
 }
+export interface IEventTreeExpand {
+    node: EventDataNode;
+    expanded?: boolean;
+    nativeEvent: MouseEvent;
+}
+export interface IEventTreeSelected {
+    event?: "select";
+    node: EventDataNode;
+    selected?: boolean;
+    nativeEvent: MouseEvent;
+    selectedNodes?: DataNode[];
+}
+
+export interface PropsEventExpand {
+    expandedKeys: Key[],
+    info: IEventTreeExpand
+}
+export interface PropsEventSelected {
+    selectedKeys: Key[],
+    info: IEventTreeSelected
+}
+
+

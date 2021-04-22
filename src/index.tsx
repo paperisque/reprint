@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import "antd/dist/antd.css";
 import "./assets/index.scss"
+import "./assets/prime.scss"
 import "./assets/dashboard.scss"
 import "./assets/dashboard.lite.scss"
 import "./assets/dashboard.dark.scss"

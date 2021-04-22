@@ -4,33 +4,34 @@ import { AppState/* , AppThunk */ } from '../';
 import api from '../../api'
 import { IDesignTreeNode } from '../../global';
 import { Key } from 'react';
+import { DataNode } from 'antd/lib/tree';
 
 const initialState: IDesignsTreeState = {
     isLoading: false,
     isError: null,
-    expanded : [],
+    expanded: [],
 };
 
 export const slicename: string = 'designstree';
 
 export const designsTreeAsync = createAsyncThunk(
-    slicename + '/' + DesignsActionTypes.DESIGN_TREE_FETCH, 
+    slicename + '/' + DesignsActionTypes.DESIGN_TREE_FETCH,
     async () => {
         const response = await api.get('/antd/tree')
         return response.data
-    } 
+    }
 )
 
 export const expandedData = (nested: IDesignTreeNode[], isNested?: boolean): string[] => {
 
     const expanded: string[] = []
-    
+
     nested.forEach((node: IDesignTreeNode) => {
 
-        if (node?.expanded) expanded.push( node.key );
+        if (node?.expanded) expanded.push(node.key);
         if (node.children && !(node?.isParent)) {
-            const expandedChilds = expandedData( node.children, true );
-            if ( expandedChilds.length ) expanded.push(...expandedChilds)
+            const expandedChilds = expandedData(node.children, true);
+            if (expandedChilds.length) expanded.push(...expandedChilds)
         }
     })
 
@@ -56,10 +57,9 @@ export const mapDesignTree = (
                     active: element.activ,
                     title: element.name,
                     key: element.ins,
-                    element: element,
                 }
 
-                if ( 'group' in node ) {
+                if ('group' in node) {
 
                     if (node?.group?.expand) treeItem.expanded = true
                     if (node?.child && node.child.length) treeItem.isParent = true
@@ -86,46 +86,72 @@ export const mapDesignTree = (
     return nodesContainer
 }
 
+const searchNode = (
+    added: IDesignTreeNode, parent: Key,
+    designs: IDesignTreeNode[]) => {
+
+    return designs.map((node: IDesignTreeNode) => {
+        if (node.key === parent) {
+            node.children?.push(added)
+        } else if (node.children?.length) {
+            node.children = searchNode(added, parent,
+                node.children)
+        }
+
+        return node
+    })
+}
+
 export const designsTreeSlice = createSlice({
     name: slicename,
-    initialState : initialState,
+    initialState: initialState,
     reducers: {
         expand: (state, action: PayloadAction<Key[]>) => {
             state.expanded = action.payload
         },
-        
-        collaps: (state, action: PayloadAction<Key>) => {
-            const index = state.expanded.indexOf( action.payload )
-            if ( index >= 0 ) state.expanded.splice( index, 1)
-        }
+
+        selected: (state, action: PayloadAction<DataNode | null>) => {
+            state.selected = action.payload
+        },
+
+        addesign: (state, action: PayloadAction<IDesignTreeNode>) => {
+            if (state.selected && state.designs) {
+                state.designs = searchNode(
+                    action.payload,
+                    state.selected.key,
+                    state.designs
+                )
+            }
+        },
     },
 
-    extraReducers: AB => { 
-        
-        AB.addCase( designsTreeAsync.pending, (state:IDesignsTreeState, action) => {
+    extraReducers: AB => {
+
+        AB.addCase(designsTreeAsync.pending, (state: IDesignsTreeState, action) => {
             state.isLoading = true
             console.log('State: ', action)
-        
-        }).addCase( designsTreeAsync.fulfilled, (state:IDesignsTreeState, action) => {
+
+        }).addCase(designsTreeAsync.fulfilled, (state: IDesignsTreeState, action) => {
             state.isLoading = false
             state.origen = action.payload
             state.designs = mapDesignTree(state.origen?.tree)
             state.expanded = expandedData(state.designs)
             console.log('Sucess: ', state)
-        
-        }).addCase( designsTreeAsync.rejected, (state:IDesignsTreeState, action) => {
+
+        }).addCase(designsTreeAsync.rejected, (state: IDesignsTreeState, action) => {
             state.isLoading = false
             state.isError = action.payload as string
-            if ( state.origen ) delete state.origen
-            if ( state.designs ) delete state.designs
+            if (state.origen) delete state.origen
+            if (state.designs) delete state.designs
             console.log('Error: ', action)
         })
     }
 })
 
-export const { expand, collaps } = designsTreeSlice.actions;
+export const { expand, selected } = designsTreeSlice.actions;
 export const selectTreeDesign = (state: AppState) => state.designstree.designs;
 export const selectTreeOrigen = (state: AppState) => state.designstree.origen;
 export const selectTreeExpanded = (state: AppState) => state.designstree.expanded;
+export const selectTreeSelected = (state: AppState) => state.designstree.selected;
 
 export default designsTreeSlice.reducer;

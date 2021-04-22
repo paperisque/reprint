@@ -1,0 +1,31 @@
+.p-treenode-content {
+    align-self: baseline;
+}
+
+.p-treenode {
+    display: flex;
+    margin-bottom: 4px;
+
+    &.p-treenode-leaf > .p-treenode-content .p-tree-toggler {
+        display: none;
+    }
+
+    &:focus{
+        outline-width: 2px;
+        outline-style: solid;
+        outline-color: rgb(120, 226, 138);
+    }
+}
+
+.p-tree-toggler {
+    order: 2;
+}
+
+.p-treenode-label {
+    width: 150px;
+}
+
+.design-node-title{
+    width: 100px;
+}
+

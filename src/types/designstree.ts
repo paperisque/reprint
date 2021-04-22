@@ -1,5 +1,6 @@
 import { Key } from "react";
 import { IDesignTreeNode } from "../global";
+import { DataNode } from "antd/lib/tree";
 
 export enum DesignsActionTypes {
     DESIGN_TREE_FETCH   = 'DESIGN_TREE_FETCH',
@@ -49,6 +50,7 @@ export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
     expanded: Key[],
+    selected?: DataNode|null,
     origen?: IDesignsTree, 
     designs?: IDesignTreeNode[],
 }

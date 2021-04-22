@@ -1,9 +1,10 @@
 import Themer from "./Themer";
-import { firstButtonsDesignTools } from './Designs'
+import { centerButtonsDesignTools, firstButtonsDesignTools } from './Designs'
 import { IButtonsTools } from "../../global";
 
 interface IButtonsBlockTools {
     firstButtonsTools:IButtonsTools[]
+    centerButtonsTools?:IButtonsTools[]
 }
 
 export const selectedLocation = (): string => {
@@ -16,7 +17,8 @@ export default function useTools():IButtonsBlockTools {
     switch( selectedLocation() ) {
         
         case '/dashboard/designs': return {
-            firstButtonsTools : firstButtonsDesignTools
+            firstButtonsTools : firstButtonsDesignTools(),
+            centerButtonsTools : centerButtonsDesignTools()
         }
         
         default: return {

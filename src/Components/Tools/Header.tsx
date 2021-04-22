@@ -40,6 +40,7 @@ export const ButtonsHeader = (button: IButtonsTools, index: number) => {
                 size="small"
                 title={button.title}
                 className={button.class}
+                disabled={button.disabled}
                 icon={<button.icon />}
                 key={index}
                 onClick={button.click}

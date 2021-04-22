@@ -1,73 +1,48 @@
-import { Layout } from "antd"
-import { FaAdjust, FaBars } from "react-icons/fa"
+import { Layout, Spin } from "antd"
+import { FaAdjust, FaCreditCard } from "react-icons/fa"
 import { ButtonsHeader, HeaderDashboard } from "../Components/Tools/Header"
-import { IButtonsTools } from '../global';
+import { IButtonsTools, IEventTreeSelected } from '../global';
 import getTools from '../Components/Tools/index';
-import React, { useEffect } from "react";
+import React, { useEffect, Key } from "react";
 import { useAppDispatch } from '../hooks';
-import { designsTreeAsync, selectTreeDesign, selectTreeExpanded } from "../store/reducers/sliceDesignsTree";
+import {
+    designsTreeAsync,
+    selectTreeDesign,
+    selectTreeExpanded
+} from '../store/reducers/sliceDesignsTree';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import DesignsTreeAntd from "../Components/Designs/DesignsTreeAntd";
-//import { nanoid } from "@reduxjs/toolkit";
+import { useActions } from '../hooks/index';
 
-
-const centerButtonsTools: IButtonsTools[] = [
-    { icon: FaAdjust },
-    { icon: FaBars },
-    { icon: FaBars },
-]
 
 const lastButtonsTools: IButtonsTools[] = [
-    { icon: FaAdjust },
+    { icon: FaCreditCard },
     { icon: FaAdjust },
     { icon: FaAdjust },
 ]
-/*
-const MapDateTree = ( 
-    inputTree: IDesignsContainer[] | IDesignsItem[] | undefined ) => {
-    
-    const __container: Array<IDesignTreeNode> = inputTree?.length ? inputTree.map( 
-        
-       ( node: IDesignsContainer | IDesignsItem ) => {
-
-        const element = 'group' in node ? node.group : node
-        
-        
-        //const expand = 'group' in node ? !!node.group.expand : false
-        //const child = 'group' in node ? node.group.child : 0
-        //const key = nanoid()
-
-        const treeItem: IDesignTreeNode = {
-            id: element.id,
-            data: element,
-            name: element.name,
-            opened: true,
-            options: {
-                async: false,
-                opened: true,
-            }
-        }
-
-        if ( 'next' in node ) treeItem.children = MapDateTree( node.next )
-
-        return treeItem
-    }) : []
-
-    return __container
-}
-*/
 
 
 export default function Designs() {
 
-    const { firstButtonsTools } = getTools()
-
     const dispatch = useAppDispatch()
+    const { designsSelectedActions } = useActions()
 
     useEffect(() => { dispatch(designsTreeAsync()) }, [dispatch])
 
     const inputData = useTypedSelector(selectTreeDesign)
     const inputExpanded = useTypedSelector(selectTreeExpanded)
+
+    const onSelection = (selectedKeys: Key[], info: any): void => {
+        const __info = info as IEventTreeSelected
+
+        if (__info.selected && __info.selectedNodes?.length) {
+            designsSelectedActions(__info.selectedNodes[0])
+        } else designsSelectedActions(null)
+
+    }
+
+    const { firstButtonsTools, centerButtonsTools } = getTools()
+
 
     return (
         <React.Fragment>
@@ -77,7 +52,6 @@ export default function Designs() {
                     smf: 5,
                     smc: 15,
                     firstCol: () => {
-
                         return (
                             firstButtonsTools.map((button, index) => (
                                 ButtonsHeader(button, index)
@@ -85,11 +59,11 @@ export default function Designs() {
                         )
                     },
                     centerCol: () => {
-                        return (
+                        return centerButtonsTools?.length ? (
                             centerButtonsTools.map((button, index) => (
                                 ButtonsHeader(button, index)
                             ))
-                        )
+                        ) : <></>
                     },
                     lastCol: () => {
                         return (
@@ -101,14 +75,17 @@ export default function Designs() {
 
                 })}
             </Layout.Header>
-            { inputData?.length && (
-                <Layout.Content className="dashboard-content">
+
+            <Layout.Content className="dashboard-content">
+                {inputData?.length ? (
                     <DesignsTreeAntd
                         treeData={inputData}
                         expanded={inputExpanded}
+                        setSelected={onSelection}
                     />
-                </Layout.Content>
-            )}
+                ) : <Spin className="dashboard-content-loader" />}
+            </Layout.Content>
+
         </React.Fragment>
 
     )
