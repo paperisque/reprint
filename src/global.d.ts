@@ -40,9 +40,11 @@ export interface IDesignTreeNodeOld {
 export interface IDesignTreeNode {
     key: string;
     active: number,
+    level: number,
     title: ReactNode | string;
     isLeaf?: boolean,
     element?: any;
+    className?: any;
     isParent?: boolean;
     isChild?: boolean;
     expanded?: boolean,

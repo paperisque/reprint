@@ -12,6 +12,10 @@ $layout-padding:3vw;
     }
 }
 
+.ant-tooltip {
+    pointer-events: none;
+}
+
 .dashboard-header {
     height: auto;
     padding: 0 $layout-padding;
@@ -34,9 +38,12 @@ $layout-padding:3vw;
 
     }
 
+    &.dashboard-pages {
+        margin-bottom: 10px;
+    }
+
     &.dashboard-tools {
 
-        margin-top: 10px;
         padding-top: $action-header-padding;
         padding-bottom: $action-header-padding;
 
@@ -80,14 +87,14 @@ $layout-padding:3vw;
 }
 
 .dashboard-content {
-    padding: 0 $layout-padding;
+    padding: 10px $layout-padding;
     margin: 0;
     height: calc(100% - 100px);
     overflow-x: hidden;
     position: absolute;
     width: 100%;
     bottom: 0;
-    
+
     .dashboard-content-loader {
         text-align: center;
         margin: 20% auto;
@@ -100,7 +107,7 @@ $layout-padding:3vw;
     .designParentChildren {
         clear: both;
 
-        > div {
+        >div {
             float: left;
         }
     }
@@ -131,7 +138,7 @@ $layout-padding:3vw;
 
 }
 
-.ant-tree .ant-tree-node-content-wrapper{
+.ant-tree .ant-tree-node-content-wrapper {
     max-width: 400px;
     padding: 0;
 }
@@ -145,15 +152,16 @@ $layout-padding:3vw;
         float: right;
         padding: 2px 6px 0;
 
-        .design-active{
+        .design-active {
             color: green;
         }
-        .design-passive{
+
+        .design-passive {
             color: red;
         }
-        .design-removed{
+
+        .design-removed {
             color: grey;
         }
     }
 }
-

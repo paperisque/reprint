@@ -1,31 +1,73 @@
-.p-treenode-content {
-    align-self: baseline;
+%prevent-focused {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: none;
 }
 
-.p-treenode {
-    display: flex;
-    margin-bottom: 4px;
+.p-tree {
+    .p-tree-container {
 
-    &.p-treenode-leaf > .p-treenode-content .p-tree-toggler {
-        display: none;
+        padding: 10px 0;
+
+        .p-treenode {
+            display: flex;
+            margin-bottom: 4px;
+
+            &.design-parent-node {
+                display: block;
+
+                .p-treenode-children {
+                    .p-treenode-label {
+                        background-color: rgb(235, 251, 255);
+                    }
+                }
+
+            }
+
+            &.p-treenode-leaf>.p-treenode-content .p-tree-toggler {
+                display: none;
+            }
+
+            .p-treenode-content {
+
+                &.design-parent-node {
+                    margin-bottom: 4px;
+                }
+
+                align-self: baseline;
+
+                &:focus {
+                    @extend %prevent-focused
+                }
+
+                &.p-highlight {
+                    .p-treenode-label {
+                        color: #495057;
+                        box-shadow: 0 0 0 0.2rem #9cffc5;
+                        background: #FFF3E0;
+                    }
+                }
+
+                .p-treenode-label {
+                    width: 150px;
+
+                    background-color: rgb(243, 243, 243);
+
+                    .design-node-title {
+                        width: 100px;
+                    }
+                }
+
+                .p-tree-toggler {
+                    order: 2;
+
+                    &:focus {
+                        @extend %prevent-focused
+                    }
+                }
+
+            }
+        }
+
     }
-
-    &:focus{
-        outline-width: 2px;
-        outline-style: solid;
-        outline-color: rgb(120, 226, 138);
-    }
 }
-
-.p-tree-toggler {
-    order: 2;
-}
-
-.p-treenode-label {
-    width: 150px;
-}
-
-.design-node-title{
-    width: 100px;
-}
-

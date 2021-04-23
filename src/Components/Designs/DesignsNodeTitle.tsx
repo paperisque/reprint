@@ -22,7 +22,6 @@ const DesignsNodeTitle = (node: DataNode) => {
     const treeNode = node as IDesignTreeNode
 
     return (
-
         <div className="designs-node">
                 <Typography.Text
                     ellipsis={{ tooltip: treeNode.title}}
@@ -30,8 +29,7 @@ const DesignsNodeTitle = (node: DataNode) => {
                     {treeNode.title}
                 </Typography.Text>
             <pre style={{ display: 'none' }}>{JSON.stringify(treeNode)}</pre>
-            <div className="designs-node-tools"
-            >
+            <div className="designs-node-tools">
                 <ActiveTool node={treeNode} />
             </div>
         </div>

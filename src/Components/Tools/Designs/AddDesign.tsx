@@ -1,18 +1,27 @@
-import { selectTreeSelected } from '../../../store/reducers/sliceDesignsTree';
+import {
+    selectTreeSelected
+} from '../../../store/reducers/sliceDesignsTree';
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { FaDatabase } from "react-icons/fa";
 import { Button, Tooltip } from "antd"
 import { useTranslation } from 'react-i18next';
 import { useActions } from '../../../hooks';
 import { nanoid } from "@reduxjs/toolkit";
-
+import { useMemo } from 'react';
+import { IDesignTreeNode } from '../../../global';
 
 export default function AddDesign() {
 
     const { t } = useTranslation()
 
-    const selected = useTypedSelector( selectTreeSelected )
+    const selected = useTypedSelector(selectTreeSelected) as IDesignTreeNode
     const { designsAddesignActions } = useActions()
+
+    const disabled = useMemo(() => {
+        return !selected ||
+            !selected.children ||
+            selected.level > 3
+    }, [selected])
 
     return (
         <Tooltip title={t('Add Design')} key="addesigntip">
@@ -20,21 +29,16 @@ export default function AddDesign() {
                 type="text"
                 shape="circle"
                 size="small"
-                disabled={!selected}
+                disabled={disabled}
                 icon={<FaDatabase />}
                 key="addesign"
                 onClick={() => {
-                    console.log('...add design', selected)
-
-                    if ( selected && selected.children ){
-
-                        designsAddesignActions({
-                            active: 0,
-                            title: 'new1',
-                            key: nanoid(),
-                        })
-                    }
-
+                    designsAddesignActions({
+                        level: selected.level + 1,
+                        title: 'new1',
+                        key: nanoid(),
+                        active: 0,
+                    })
                 }}
             />
         </Tooltip>

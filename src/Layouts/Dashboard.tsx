@@ -23,7 +23,7 @@ export default function Dashboard() {
 
     return (
         <Layout className="dashboard-layout">
-            <Layout.Header className="dashboard-header">
+            <Layout.Header className="dashboard-header dashboard-pages">
                 {HeaderDashboard({
                     pageClass: "dashboard-menu",
                     lastColClass: "dashboard-logo",

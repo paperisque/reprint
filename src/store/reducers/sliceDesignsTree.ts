@@ -42,7 +42,8 @@ export const expandedData = (nested: IDesignTreeNode[], isNested?: boolean): str
 
 
 export const mapDesignTree = (
-    inputTree: IDesignsContainer[] | IDesignsItem[] | undefined) => {
+    inputTree: IDesignsContainer[] | IDesignsItem[] | undefined,
+    level?: number ) => {
 
     const nodesContainer: Array<IDesignTreeNode> =
         inputTree?.length ? inputTree.map(
@@ -57,21 +58,23 @@ export const mapDesignTree = (
                     active: element.activ,
                     title: element.name,
                     key: element.ins,
+                    level: level||0
                 }
 
                 if ('group' in node) {
 
                     if (node?.group?.expand) treeItem.expanded = true
-                    if (node?.child && node.child.length) treeItem.isParent = true
+                    if (node?.child && node.child.length) {
+                        treeItem.className = 'design-parent-node'
+                        treeItem.isParent = true
+                    }
 
                     const nested = node?.next ? node.next :
-                        (node?.child ? node.child : null)
+                        (node?.child ? node.child : undefined)
 
-                    if (nested && nested?.length)
-                        treeItem.children = mapDesignTree(nested)
+                    treeItem.children = mapDesignTree(nested, (level||0) + 1)
 
-
-                } else {
+                } else if (node?.ins) {
 
                     treeItem.isLeaf = true
                     treeItem.isChild = true
@@ -86,16 +89,35 @@ export const mapDesignTree = (
     return nodesContainer
 }
 
-const searchNode = (
-    added: IDesignTreeNode, parent: Key,
-    designs: IDesignTreeNode[]) => {
+export const levelNode = ( search: Key,
+    nodes: IDesignTreeNode[] | undefined, 
+    level?: number ) : number => {
+    level = level || 0
+    if ( nodes ) for( let i = 0; i < nodes.length; i++ ) {
+        if ( nodes[i].key === search ) return level + 1
+        else if ( nodes[i].children?.length ) {
+            const chilsLevel = levelNode(
+                search, nodes[i].children, level + 1)
+            if ( chilsLevel > level + 1 ) 
+                return chilsLevel
+        }
+    }
 
-    return designs.map((node: IDesignTreeNode) => {
-        if (node.key === parent) {
-            node.children?.push(added)
+    return level
+}
+
+
+export const mutationNode = ( 
+    search: Key,
+    designs: IDesignTreeNode[],
+    mutation: (node: IDesignTreeNode) => IDesignTreeNode) => {
+
+    return designs.flatMap((node: IDesignTreeNode) => {
+        if (node.key === search) {
+            return mutation(node) || []
         } else if (node.children?.length) {
-            node.children = searchNode(added, parent,
-                node.children)
+            node.children = mutationNode(search,
+                node.children, mutation)
         }
 
         return node
@@ -116,11 +138,12 @@ export const designsTreeSlice = createSlice({
 
         addesign: (state, action: PayloadAction<IDesignTreeNode>) => {
             if (state.selected && state.designs) {
-                state.designs = searchNode(
-                    action.payload,
-                    state.selected.key,
-                    state.designs
-                )
+                state.designs = mutationNode(
+                state.selected.key,
+                state.designs, (node: IDesignTreeNode) => {
+                    node.children?.push(action.payload)
+                    return node
+                })
             }
         },
     },
