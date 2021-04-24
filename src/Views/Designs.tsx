@@ -11,8 +11,9 @@ import {
     selectTreeExpanded
 } from '../store/reducers/sliceDesignsTree';
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import DesignsTreeAntd from "../Components/Designs/DesignsTreeAntd";
+import DesignsOverview from "../Components/Designs";
 import { useActions } from '../hooks/index';
+
 
 const lastButtonsTools: IButtonsTools[] = [
     { icon: FaCreditCard },
@@ -76,9 +77,8 @@ export default function Designs() {
             </Layout.Header>
 
             <Layout.Content className="dashboard-content">
-              
                 {inputData?.length ? (
-                    <DesignsTreeAntd
+                    <DesignsOverview
                         treeData={inputData}
                         expanded={inputExpanded}
                         setSelected={onSelection}

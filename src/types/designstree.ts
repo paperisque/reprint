@@ -79,3 +79,9 @@ export type TDesignsAction =
     IDesignsTreeSuccess | 
     IDesignsTreeError |
     IDesignsTreeExpand;
+
+export interface IDesignsOverviewProps {
+    treeData: Array<IDesignTreeNode>,
+    expanded: Key[], 
+    setSelected:(selectedKeys: Key[], info: any)=> void
+}    
