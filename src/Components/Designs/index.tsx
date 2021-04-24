@@ -1,6 +1,7 @@
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import DesignsTree from "./DesignsTree";
 import { IDesignsOverviewProps} from "../../types/designstree";
+import DesignsAccordion from "./DesignsAccordion";
 
 const DesignsOverview = ( props: IDesignsOverviewProps ) => {
     
@@ -9,7 +10,7 @@ const DesignsOverview = ( props: IDesignsOverviewProps ) => {
     )
 
     return designsMode ? (
-        <></>
+        <DesignsAccordion {...props} />
     ) : <DesignsTree {...props} />
 
 }

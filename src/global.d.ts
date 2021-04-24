@@ -41,7 +41,7 @@ export interface IDesignTreeNode {
     key: string;
     active: number,
     level: number,
-    title: ReactNode | string;
+    title: string;
     isLeaf?: boolean,
     element?: any;
     className?: any;
