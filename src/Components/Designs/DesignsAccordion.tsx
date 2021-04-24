@@ -15,8 +15,12 @@ const treeEbene = (
             if (next.length) {
                 children.push(...next)
                 break
-            }
+            } 
         }
+        if (children.length == 1){
+            keys.push(ebene.key)
+            return []
+        }   
     } else keys.push(ebene.key)
     return children
 
@@ -48,6 +52,13 @@ const reduceHeader = (ebene: IDesignTreeNode[]) => {
     }, []).join(' / ')
 }
 
+const designEbene = (ebene: IDesignTreeNode[]) => {
+    const children = ebene[ebene.length - 1].children
+    return children?.map((node) => (
+        <div>{node.title}</div>
+    ))
+}
+
 export default function DesignsAccordion({
     treeData, expanded, setSelected }: IDesignsOverviewProps) {
 
@@ -60,6 +71,7 @@ export default function DesignsAccordion({
         <Collapse>
             {ebenen.map((ebene: IDesignTreeNode[], index) => (
                 <Collapse.Panel key={index} header={reduceHeader(ebene)}>
+                    {designEbene(ebene)}
                 </Collapse.Panel>
             ))}
         </Collapse>
