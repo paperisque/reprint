@@ -2,6 +2,7 @@ import { Key, useMemo } from "react";
 import { IDesignTreeNode } from "../../global";
 import { IDesignsOverviewProps } from "../../types/designstree";
 import { Collapse } from 'antd'
+import DesignsNodeBox from "./DesignsNodeBox";
 
 const treeEbene = (
     ebene: IDesignTreeNode, keys: Key[]): IDesignTreeNode[] => {
@@ -15,18 +16,18 @@ const treeEbene = (
             if (next.length) {
                 children.push(...next)
                 break
-            } 
+            }
         }
-        if (children.length == 1){
+        if (children.length === 1) {
             keys.push(ebene.key)
             return []
-        }   
+        }
     } else keys.push(ebene.key)
     return children
 
 }
 
-const branchEbenen = (tree: IDesignTreeNode[]) => {
+const branchingEbenen = (tree: IDesignTreeNode[]) => {
     const ebenen = [], keys: Key[] = []; let branch = []
 
     for (let j = 0; j < tree.length; j++) {
@@ -37,7 +38,7 @@ const branchEbenen = (tree: IDesignTreeNode[]) => {
             if (branch.length) ebenen.push(branch)
 
             //console.log(reduceHeader(branch))
-        } while ( branch.length )
+        } while (branch.length)
 
         keys.splice(0, keys.length)
     }
@@ -55,7 +56,13 @@ const reduceHeader = (ebene: IDesignTreeNode[]) => {
 const designEbene = (ebene: IDesignTreeNode[]) => {
     const children = ebene[ebene.length - 1].children
     return children?.map((node) => (
-        <div>{node.title}</div>
+        <li className="p-treenode" key={node.key}>
+            <div className="p-treenode-content">
+                <span className="p-treenode-label">
+                    {DesignsNodeBox(node)}
+                </span>
+            </div>    
+        </li>
     ))
 }
 
@@ -63,15 +70,18 @@ export default function DesignsAccordion({
     treeData, expanded, setSelected }: IDesignsOverviewProps) {
 
     const ebenen = useMemo(() => {
-        return branchEbenen(treeData)
+        return branchingEbenen(treeData)
     }, [treeData])
 
 
     return (
-        <Collapse>
+        <Collapse className="p-tree">
             {ebenen.map((ebene: IDesignTreeNode[], index) => (
-                <Collapse.Panel key={index} header={reduceHeader(ebene)}>
-                    {designEbene(ebene)}
+                <Collapse.Panel className="design-parent-node"
+                key={index} header={reduceHeader(ebene)}>
+                    <ul className="p-tree-container">
+                        {designEbene(ebene)}
+                    </ul>
                 </Collapse.Panel>
             ))}
         </Collapse>

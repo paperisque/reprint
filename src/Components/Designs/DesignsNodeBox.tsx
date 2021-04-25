@@ -18,7 +18,7 @@ const ActiveTool = ({ node }: { node: IDesignTreeNode }) => {
     )
 }
 
-const DesignsNodeTitle = (node: DataNode) => {
+const DesignsNodeBox = (node: DataNode) => {
     const treeNode = node as IDesignTreeNode
 
     return (
@@ -36,4 +36,4 @@ const DesignsNodeTitle = (node: DataNode) => {
     )
 }
 
-export default DesignsNodeTitle
+export default DesignsNodeBox

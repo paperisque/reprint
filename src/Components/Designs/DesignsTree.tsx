@@ -1,5 +1,5 @@
 import { Key, useMemo } from "react";
-import DesignsNodeTitle from './DesignsNodeTitle';
+import DesignsNodeBox from './DesignsNodeBox';
 import { useActions } from '../../hooks';
 import { ExpandedKeysType, Tree as PrimeTree } from 'primereact/tree';
 import TreeNode from "primereact/components/treenode/TreeNode";
@@ -44,7 +44,7 @@ export default function DesignsTree({
             metaKeySelection={false}
             expandedKeys={expandedPrime}
             selectionKeys={primeSelected}
-            nodeTemplate={DesignsNodeTitle}
+            nodeTemplate={DesignsNodeBox}
             onToggle={(e) => {
                 console.log('...toogle tree', e)
                 ExpandNode(expandedAntd(e.value))

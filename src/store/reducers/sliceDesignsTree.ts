@@ -17,7 +17,12 @@ export const slicename: string = 'designstree';
 export const designsTreeAsync = createAsyncThunk(
     slicename + '/' + DesignsActionTypes.DESIGN_TREE_FETCH,
     async () => {
-        const response = await api.get('/antd/tree')
+        const __devauth = process.env.REACT_APP_ORG &&
+                          process.env.REACT_APP_USER ? {
+            org: process.env.REACT_APP_ORG,
+            user: process.env.REACT_APP_USER                
+        } : {}
+        const response = await api.post('/antd/tree', __devauth)
         return response.data
     }
 )
