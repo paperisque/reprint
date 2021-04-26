@@ -98,49 +98,16 @@ $layout-padding:3vw;
     .dashboard-content-loader {
         text-align: center;
         margin: 20% auto;
-        display: block;
+        position: absolute;
+        top: 0;
+        z-index: 1000;
+        left: 50%;
+
     }
 }
 
-.designTreeWrapper {
-
-    .designParentChildren {
-        clear: both;
-
-        >div {
-            float: left;
-        }
-    }
-
-    .designParentChildren>[class^="hyperNodeWrapper"] {
-
-        &[undefined] {
-            [class^="hyperNode"] {
-                cursor: default;
-            }
-        }
-
-        width: 200px;
-        margin-right: 20px;
-
-        >div {
-            width: auto;
-        }
-    }
-
-    [class*="dragZoneItemSelected"] {
-        background-color: rgba(58, 153, 74, 0.842);
-        border: 1px solid black;
-
-    }
-
-
-
-}
-
-.ant-tree .ant-tree-node-content-wrapper {
-    max-width: 400px;
-    padding: 0;
+.ant-collapse.p-tree .ant-collapse-header {
+    padding-bottom: 5px;
 }
 
 .designs-node {
@@ -150,7 +117,7 @@ $layout-padding:3vw;
 
     .designs-node-tools {
         float: right;
-        padding: 2px 6px 0;
+        padding: 2px 4px 0;
 
         .design-active {
             color: green;

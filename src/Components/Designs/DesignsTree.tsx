@@ -7,14 +7,16 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
-import { selectTreeSelected } from "../../store/reducers/sliceDesignsTree";
+import { selectTreeSelected } from "../../store/reducers/DesignsTree/sliceDesignsTree";
 import { IDesignsOverviewProps } from "../../types/designstree";
-
+import { IDesignTreeNode } from '../../global';
 
 export default function DesignsTree({
     treeData, expanded, setSelected }: IDesignsOverviewProps) {
 
     const { designsExpandActions } = useActions()
+    const { designsTreeLazyChildsActions } = useActions()
+
     const ExpandNode = (expandedKeys: Key[]) => {
         designsExpandActions(expandedKeys)
     }
@@ -50,8 +52,11 @@ export default function DesignsTree({
                 ExpandNode(expandedAntd(e.value))
             }}
 
-            onExpand={(e) => {
+            onExpand={(e : { node: TreeNode }) => {
                 console.log('...Expand tree', e)
+                const node = e.node as IDesignTreeNode
+                if ( e.node.children ) return true;
+                else designsTreeLazyChildsActions(node)
             }}
 
             onCollapse={(e) => {

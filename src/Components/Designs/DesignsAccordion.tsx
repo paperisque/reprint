@@ -9,7 +9,7 @@ const treeEbene = (
     const children: IDesignTreeNode[] = [ebene]
 
     if (keys.indexOf(ebene.key) >= 0) return []
-    else if (ebene.isParent) keys.push(ebene.key)
+    else if (ebene.hasChilds) keys.push(ebene.key)
     else if (ebene.children && ebene.children.length) {
         for (let i = 0; i < ebene.children.length; i++) {
             const next = treeEbene(ebene.children[i], keys)
@@ -50,13 +50,14 @@ const reduceHeader = (ebene: IDesignTreeNode[]) => {
     return ebene.reduce<Key[]>((header, node) => {
         header.push(node.title)
         return header
-    }, []).join(' / ')
+    }, []).join(' | ')
 }
 
 const designEbene = (ebene: IDesignTreeNode[]) => {
     const children = ebene[ebene.length - 1].children
     return children?.map((node) => (
-        <li className="p-treenode" key={node.key}>
+        <li className="p-treenode" 
+            key={node.key}>
             <div className="p-treenode-content">
                 <span className="p-treenode-label">
                     {DesignsNodeBox(node)}
@@ -75,13 +76,19 @@ export default function DesignsAccordion({
 
 
     return (
-        <Collapse className="p-tree">
+        <Collapse className="p-tree"
+                  accordion={true}
+                  bordered={false}
+                  destroyInactivePanel={true}
+        >
             {ebenen.map((ebene: IDesignTreeNode[], index) => (
-                <Collapse.Panel className="design-parent-node"
+                <Collapse.Panel className="p-tree-container"
                 key={index} header={reduceHeader(ebene)}>
-                    <ul className="p-tree-container">
+                <div className="p-treenode design-parent-node">
+                    <ul className="p-treenode-children">
                         {designEbene(ebene)}
                     </ul>
+                </div>        
                 </Collapse.Panel>
             ))}
         </Collapse>

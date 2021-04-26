@@ -4,10 +4,18 @@
     box-shadow: none;
 }
 
-.p-tree {
-    .p-tree-container {
 
+#design-prime-tree {
+
+    >.p-tree-container{
         padding: 10px 0;
+    }
+
+}
+
+.p-tree {
+
+    .p-tree-container {
 
         .p-treenode {
             display: flex;
@@ -49,12 +57,12 @@
                 }
 
                 .p-treenode-label {
-                    width: 150px;
+                    width: 200px;
 
                     background-color: rgb(243, 243, 243);
 
                     .design-node-title {
-                        width: 100px;
+                        width: 120px;
                     }
                 }
 

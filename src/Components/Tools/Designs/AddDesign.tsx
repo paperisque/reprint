@@ -1,46 +1,40 @@
-import {
-    selectTreeSelected
-} from '../../../store/reducers/sliceDesignsTree';
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { FaDatabase } from "react-icons/fa";
-import { Button, Tooltip } from "antd"
-import { useTranslation } from 'react-i18next';
-import { useActions } from '../../../hooks';
-import { nanoid } from "@reduxjs/toolkit";
-import { useMemo } from 'react';
+import AddButton from './AddButton';
+import { FaCreditCard } from "react-icons/fa";
 import { IDesignTreeNode } from '../../../global';
+import { useActions } from '../../../hooks';
+import { nanoid } from '@reduxjs/toolkit';
 
 export default function AddDesign() {
 
-    const { t } = useTranslation()
-
-    const selected = useTypedSelector(selectTreeSelected) as IDesignTreeNode
     const { designsAddesignActions } = useActions()
 
-    const disabled = useMemo(() => {
-        return !selected ||
-            !selected.children ||
-            selected.level > 3
-    }, [selected])
+    const disabled = ( selected: IDesignTreeNode ) => {
+        return !selected || 
+                selected?.leaf === false ||
+              !!selected?.isChild || (
+               !selected?.hasChilds &&
+              !!selected?.children?.length )
+    }
 
     return (
-        <Tooltip title={t('Add Design')} key="addesigntip">
-            <Button
-                type="text"
-                shape="circle"
-                size="small"
-                disabled={disabled}
-                icon={<FaDatabase />}
-                key="addesign"
-                onClick={() => {
-                    designsAddesignActions({
-                        level: selected.level + 1,
-                        title: 'new1',
-                        key: nanoid(),
-                        active: 0,
-                    })
-                }}
-            />
-        </Tooltip>
+        <AddButton 
+            title="Add Design"
+            isDisabled={disabled}
+            icon={<FaCreditCard />}
+            key="add_design"
+            __key="add_design"
+            action={(e, selected) => {
+                console.log('start add design')
+                designsAddesignActions({
+                    level: selected.level + 1,
+                    position: 0,
+                    id: 0,
+                    title: 'new1',
+                    key: nanoid(),
+                    active: 0,
+                })
+            }}
+        />
+        
     )
 }

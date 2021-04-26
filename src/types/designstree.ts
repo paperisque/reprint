@@ -1,12 +1,15 @@
 import { Key } from "react";
 import { IDesignTreeNode } from "../global";
-import { DataNode } from "antd/lib/tree";
+import TreeNode from "primereact/components/treenode/TreeNode";
 
 export enum DesignsActionTypes {
     DESIGN_TREE_FETCH   = 'DESIGN_TREE_FETCH',
     DESIGN_TREE_SUCCESS = 'DESIGN_TREE_SUCCESS',
     DESIGN_TREE_ERROR   = 'DESIGN_TREE_ERROR',
-    DESIGN_TREE_EXPAND  = 'DESIGN_TREE_EXPAND'
+    DESIGN_TREE_EXPAND  = 'DESIGN_TREE_EXPAND',
+    
+    DESIGN_TREE_LAZYCHILDS  = 'DESIGN_TREE_LAZYCHILDS',
+    DESIGN_TREE_ADDEBENE  = 'DESIGN_TREE_ADDEBENE'
 }
 
 export interface IDesignsElement {
@@ -50,13 +53,19 @@ export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
     expanded: Key[],
-    selected?: DataNode|null,
+    selected?: TreeNode|null,
     origen?: IDesignsTree, 
-    designs?: IDesignTreeNode[],
+    designs: IDesignTreeNode[],
 }
 
+export interface IDesignsTreeLazyChild {
+    type : DesignsActionTypes.DESIGN_TREE_LAZYCHILDS,
+}
 export interface IDesignsTreeFetch {
     type : DesignsActionTypes.DESIGN_TREE_FETCH,
+}
+export interface IDesignsTreeAddEbene {
+    type : DesignsActionTypes.DESIGN_TREE_ADDEBENE,
 }
 
 export interface IDesignsTreeSuccess {
@@ -78,7 +87,9 @@ export type TDesignsAction =
     IDesignsTreeFetch | 
     IDesignsTreeSuccess | 
     IDesignsTreeError |
-    IDesignsTreeExpand;
+    IDesignsTreeExpand |
+    IDesignsTreeLazyChild |
+    IDesignsTreeAddEbene;
 
 export interface IDesignsOverviewProps {
     treeData: Array<IDesignTreeNode>,

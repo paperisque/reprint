@@ -1,4 +1,4 @@
-import { Layout, Spin } from "antd"
+import { Layout } from "antd"
 import { FaAdjust, FaCreditCard } from "react-icons/fa"
 import { ButtonsHeader, HeaderDashboard } from "../Components/Tools/Header"
 import { IButtonsTools, IEventTreeSelected } from '../global';
@@ -6,13 +6,14 @@ import getTools from '../Components/Tools/index';
 import React, { useEffect, Key } from "react";
 import { useAppDispatch } from '../hooks';
 import {
-    designsTreeAsync,
     selectTreeDesign,
     selectTreeExpanded
-} from '../store/reducers/sliceDesignsTree';
+} from '../store/reducers/DesignsTree/sliceDesignsTree';
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import DesignsOverview from "../Components/Designs";
 import { useActions } from '../hooks/index';
+import { designsTreeAsync } from "../store/reducers/DesignsTree/reducerAsyncTree";
+import Loader from "../Components/Tools/Loader";
 
 
 const lastButtonsTools: IButtonsTools[] = [
@@ -45,7 +46,7 @@ export default function Designs() {
 
     return (
         <React.Fragment>
-            <Layout.Header 
+            <Layout.Header
                 className="dashboard-header dashboard-tools">
                 {HeaderDashboard({
                     pageClass: "",
@@ -77,14 +78,12 @@ export default function Designs() {
             </Layout.Header>
 
             <Layout.Content className="dashboard-content">
-                {inputData?.length ? (
-                    <DesignsOverview
-                        treeData={inputData}
-                        expanded={inputExpanded}
-                        setSelected={onSelection}
-                    />
-                ) : <Spin className="dashboard-content-loader" />}
-                                               
+                <DesignsOverview
+                    treeData={inputData}
+                    expanded={inputExpanded}
+                    setSelected={onSelection}
+                />
+                <Loader />
             </Layout.Content>
 
         </React.Fragment>

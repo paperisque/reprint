@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent, Key } from 'react';
+import { MouseEvent, Key, ReactNode } from 'react';
 import { IconType } from 'react-icons';
 import React from 'react';
 
@@ -38,14 +38,16 @@ export interface IDesignTreeNodeOld {
     children?: ITreeNode[];
 }
 export interface IDesignTreeNode {
+    id:number;
     key: string;
     active: number,
     level: number,
     title: string;
-    isLeaf?: boolean,
+    leaf?: boolean,
     element?: any;
+    position: number;
     className?: any;
-    isParent?: boolean;
+    hasChilds?: boolean;
     isChild?: boolean;
     expanded?: boolean,
     children?: IDesignTreeNode[];
@@ -70,6 +72,14 @@ export interface PropsEventExpand {
 export interface PropsEventSelected {
     selectedKeys: Key[],
     info: IEventTreeSelected
+}
+
+export interface PropsAddButton {
+    __key:string,
+    title: string,
+    icon: ReactNode,
+    isDisabled(selected:IDesignTreeNode), 
+    action(e:MouseEvent, selected:IDesignTreeNode)
 }
 
 

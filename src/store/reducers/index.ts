@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { reducerAuthentication } from './reducerAuthentication'
 import { reducerThemes } from './reducerThemes';
 import { reducerDesignsMode } from './reducerDesignsMode';
-import sliceDesignsTree from './sliceDesignsTree'
+import sliceDesignsTree from './DesignsTree/sliceDesignsTree'
 
 export const applicationReducer = combineReducers({
     authentication: reducerAuthentication,
