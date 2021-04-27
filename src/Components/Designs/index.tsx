@@ -1,6 +1,6 @@
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import DesignsTree from "./DesignsTree";
-import { IDesignsOverviewProps} from "../../types/designstree";
+import { IDesignsOverviewProps} from "../../store/types/designstree";
 import DesignsAccordion from "./DesignsAccordion";
 
 const DesignsOverview = ( props: IDesignsOverviewProps ) => {

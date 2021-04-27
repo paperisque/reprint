@@ -1,6 +1,6 @@
 import classname from 'classnames'
 import { PageHeader, Button, Row, Col, Divider } from "antd";
-import { HeaderLayout, IButtonsTools } from "../../global";
+import { HeaderLayout, IButtonsTools } from "../../types/global";
 
 export const HeaderDashboard = (props: HeaderLayout) => {
 

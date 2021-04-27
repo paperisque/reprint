@@ -1,6 +1,5 @@
 import { Key } from "react";
-import { IDesignTreeNode } from "../global";
-import TreeNode from "primereact/components/treenode/TreeNode";
+import { IDesignTreeNode } from "../../types/designs";
 
 export enum DesignsActionTypes {
     DESIGN_TREE_FETCH   = 'DESIGN_TREE_FETCH',
@@ -9,7 +8,9 @@ export enum DesignsActionTypes {
     DESIGN_TREE_EXPAND  = 'DESIGN_TREE_EXPAND',
     
     DESIGN_TREE_LAZYCHILDS  = 'DESIGN_TREE_LAZYCHILDS',
-    DESIGN_TREE_ADDEBENE  = 'DESIGN_TREE_ADDEBENE'
+    DESIGN_TREE_ADDEBENE    = 'DESIGN_TREE_ADDEBENE',
+    DESIGN_TREE_ADDDESIGN   = 'DESIGN_TREE_ADDDESIGN',
+    DESIGN_TREE_REMDESIGN   = 'DESIGN_TREE_REMDESIGN'
 }
 
 export interface IDesignsElement {
@@ -25,6 +26,12 @@ export interface IDesignsElement {
 export interface IDesignsGroup extends IDesignsElement {
     expand:string,
     child: number    
+}
+
+export interface IDesignsAppend extends IDesignsElement {
+    parentKey:string,
+    level:number,
+    gro:number
 }
 
 export interface IDesignsItem extends IDesignsElement {
@@ -53,7 +60,7 @@ export interface IDesignsTreeState {
     isLoading : boolean,
     isError : null | string,
     expanded: Key[],
-    selected?: TreeNode|null,
+    selected: IDesignTreeNode|null,
     origen?: IDesignsTree, 
     designs: IDesignTreeNode[],
 }
@@ -66,6 +73,14 @@ export interface IDesignsTreeFetch {
 }
 export interface IDesignsTreeAddEbene {
     type : DesignsActionTypes.DESIGN_TREE_ADDEBENE,
+}
+
+export interface IDesignsTreeAddDesign {
+    type : DesignsActionTypes.DESIGN_TREE_ADDDESIGN,
+}
+
+export interface IDesignsTreeRemoveDesign {
+    type : DesignsActionTypes.DESIGN_TREE_REMDESIGN,
 }
 
 export interface IDesignsTreeSuccess {
@@ -89,7 +104,9 @@ export type TDesignsAction =
     IDesignsTreeError |
     IDesignsTreeExpand |
     IDesignsTreeLazyChild |
-    IDesignsTreeAddEbene;
+    IDesignsTreeAddEbene |
+    IDesignsTreeAddDesign |
+    IDesignsTreeRemoveDesign;
 
 export interface IDesignsOverviewProps {
     treeData: Array<IDesignTreeNode>,

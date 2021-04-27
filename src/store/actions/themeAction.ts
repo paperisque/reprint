@@ -1,4 +1,4 @@
-import { ThemeActionTypes, TThemeAction } from '../../types/themes';
+import { ThemeActionTypes, TThemeAction } from '../types/themes';
 import { Dispatch } from 'redux';
 import { AppState } from '../';
 

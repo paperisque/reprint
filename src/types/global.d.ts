@@ -37,21 +37,7 @@ export interface IDesignTreeNodeOld {
     options?: IDataOptions;
     children?: ITreeNode[];
 }
-export interface IDesignTreeNode {
-    id:number;
-    key: string;
-    active: number,
-    level: number,
-    title: string;
-    leaf?: boolean,
-    element?: any;
-    position: number;
-    className?: any;
-    hasChilds?: boolean;
-    isChild?: boolean;
-    expanded?: boolean,
-    children?: IDesignTreeNode[];
-}
+
 export interface IEventTreeExpand {
     node: EventDataNode;
     expanded?: boolean;

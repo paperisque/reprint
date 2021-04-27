@@ -1,4 +1,4 @@
-import { ThemeActionTypes, ITheme, TThemeAction } from '../../types/themes';
+import { ThemeActionTypes, ITheme, TThemeAction } from '../types/themes';
 import { load, save } from 'react-cookies'
 
 const LITE:ITheme = { name: 'lite' }

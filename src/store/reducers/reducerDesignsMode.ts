@@ -1,4 +1,4 @@
-import { ModeActionTypes, IDesignsMode, TModeAction } from '../../types/designsmode';
+import { ModeActionTypes, IDesignsMode, TModeAction } from '../types/designsmode';
 
 const TREE:IDesignsMode = { mode: false }
 const LIST:IDesignsMode = { mode: true }

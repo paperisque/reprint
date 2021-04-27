@@ -1,6 +1,5 @@
 import { Typography } from "antd"
-import { DataNode } from "antd/lib/tree";
-import { IDesignTreeNode } from "../../global";
+import { IDesignTreeNode } from "../../types/designs";
 import { FaSquare } from "react-icons/fa";
 import classname from 'classnames';
 
@@ -18,19 +17,18 @@ const ActiveTool = ({ node }: { node: IDesignTreeNode }) => {
     )
 }
 
-const DesignsNodeBox = (node: DataNode) => {
-    const treeNode = node as IDesignTreeNode
+const DesignsNodeBox = (node: IDesignTreeNode) => {
 
     return (
         <div className="designs-node">
                 <Typography.Text
-                    ellipsis={{ tooltip: treeNode.title}}
+                    ellipsis={{ tooltip: node.label}}
                     className="design-node-title">
-                    {treeNode.title}
+                    {node.label}
                 </Typography.Text>
-            <pre style={{ display: 'none' }}>{JSON.stringify(treeNode)}</pre>
+            <pre style={{ display: 'none' }}>{JSON.stringify(node)}</pre>
             <div className="designs-node-tools">
-                <ActiveTool node={treeNode} />
+                <ActiveTool node={node} />
             </div>
         </div>
     )

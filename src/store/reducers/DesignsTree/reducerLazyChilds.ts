@@ -1,7 +1,6 @@
 import { ActionReducerMapBuilder, createAsyncThunk } from "@reduxjs/toolkit"
-import { IDesignTreeNode } from "../../../global"
-import TreeNode from "primereact/components/treenode/TreeNode"
-import { DesignsActionTypes, IDesignsContainer, IDesignsTreeState } from "../../../types/designstree"
+import { IDesignTreeNode } from "../../../types/designs"
+import { DesignsActionTypes, IDesignsContainer, IDesignsTreeState } from "../../types/designstree"
 import { mapDesignTree, mutationNode, slicename } from "./sliceDesignsMutation"
 import api from "../../../api"
 
@@ -16,16 +15,17 @@ export const designsTreeLazyChilds = createAsyncThunk(
 )
 
 const updateDesignsTree = (state: IDesignsTreeState, responce: IDesignsContainer) => {
+    
     if ( !responce?.group.id || 
          !responce?.child?.length || !state?.designs) return state?.designs;
+   
     return mutationNode( responce.group.ins, state.designs, (node) => {
         node.children  = mapDesignTree( responce.child, node.level + 1 )
         node.className = 'design-parent-node'
         node.hasChilds = true
         node.leaf      = true
         
-        state.selected = state.selected?.key === node.key ? 
-        node as TreeNode : null
+        state.selected = state.selected?.key === node.key ? node : null
 
         return node
     })

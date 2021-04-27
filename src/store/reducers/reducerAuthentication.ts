@@ -1,4 +1,4 @@
-import { AuthActionTypes, IAuthentication, TAuthenticationAction } from '../../types/authentication'
+import { AuthActionTypes, IAuthentication, TAuthenticationAction } from '../types/authentication'
 
 const stateAuthentication : IAuthentication = {
     isAuthenticated : true,

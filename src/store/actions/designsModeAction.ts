@@ -1,4 +1,4 @@
-import {  ModeActionTypes, TModeAction } from '../../types/designsmode';
+import {  ModeActionTypes, TModeAction } from '../types/designsmode';
 import { Dispatch } from 'redux';
 import { AppState } from '../';
 

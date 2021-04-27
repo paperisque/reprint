@@ -1,12 +1,11 @@
 import AddButton from './AddButton';
 import { FaCreditCard } from "react-icons/fa";
-import { IDesignTreeNode } from '../../../global';
+import { IDesignTreeNode } from '../../../types/designs';
 import { useActions } from '../../../hooks';
-import { nanoid } from '@reduxjs/toolkit';
 
 export default function AddDesign() {
 
-    const { designsAddesignActions } = useActions()
+    const { designsAddDesignActions } = useActions()
 
     const disabled = ( selected: IDesignTreeNode ) => {
         return !selected || 
@@ -25,14 +24,7 @@ export default function AddDesign() {
             __key="add_design"
             action={(e, selected) => {
                 console.log('start add design')
-                designsAddesignActions({
-                    level: selected.level + 1,
-                    position: 0,
-                    id: 0,
-                    title: 'new1',
-                    key: nanoid(),
-                    active: 0,
-                })
+                designsAddDesignActions(selected)
             }}
         />
         

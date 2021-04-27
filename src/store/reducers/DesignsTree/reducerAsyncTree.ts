@@ -1,6 +1,6 @@
 import { ActionReducerMapBuilder, createAsyncThunk } from "@reduxjs/toolkit";
 import { expandedData, mapDesignTree, slicename } from "./sliceDesignsMutation";
-import { DesignsActionTypes, IDesignsTreeState, IDesignsItem, IDesignsGroup } from '../../../types/designstree';
+import { DesignsActionTypes, IDesignsTreeState } from '../../types/designstree';
 import api from '../../../api'
 
 const postInitAuth = () => {
@@ -20,28 +20,6 @@ export const designsTreeAsync = createAsyncThunk(
         return response.data
     }
 )
-/* *
-
-const updateDesignsTree = (state: IDesignsTreeState, responce: IDesignsGroup) => {
-    if ( !responce?.id || !state?.designs) return state?.designs;
-    return mutationNode( (responce as any).keyParent, state.designs, (node) => {
-        
-        node.children.push({
-            level: responce.level,
-
-        })  = mapDesignTree( responce.child, node.level + 1 )
-        node.className = 'design-parent-node'
-        node.hasChilds = true
-        node.leaf      = true
-        
-        state.selected = state.selected?.key === node.key ? 
-        node as TreeNode : null
-
-        return node
-    })
-}
-*/
-
 
 const reducerAsyncTree = (builder: ActionReducerMapBuilder<IDesignsTreeState>) => {
 
@@ -53,6 +31,7 @@ const reducerAsyncTree = (builder: ActionReducerMapBuilder<IDesignsTreeState>) =
         state.origen = action.payload
         state.designs = mapDesignTree(state.origen?.tree)
         state.expanded = expandedData(state.designs)
+        state.selected = null 
         state.isLoading = false
         console.log('Sucess: ', state)
 

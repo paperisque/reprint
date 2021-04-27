@@ -1,6 +1,6 @@
 import AddButton from './AddButton';
 import { FaDatabase } from "react-icons/fa";
-import { IDesignTreeNode } from '../../../global';
+import { IDesignTreeNode } from '../../../types/designs';
 import { useActions } from '../../../hooks/index';
 
 export default function AddEbene() {

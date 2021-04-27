@@ -3,23 +3,24 @@ import api from "../../../api"
 import { IDesignTreeNode } from "../../../types/designs"
 import { DesignsActionTypes, IDesignsAppend, IDesignsTreeState } from "../../types/designstree"
 import { mutationNode, slicename } from "./sliceDesignsMutation"
+//import { nanoid } from '@reduxjs/toolkit';
 
-export const designsAddEbene = createAsyncThunk(
-    slicename + '/' + DesignsActionTypes.DESIGN_TREE_ADDEBENE,
+export const designsAddDesign = createAsyncThunk(
+    slicename + '/' + DesignsActionTypes.DESIGN_TREE_ADDDESIGN,
     async (selected: IDesignTreeNode) => {
         const post = {
             parent: selected.id,
             level: selected.level,
             key: selected.key
         }
-        const response = await api.post('/antd/addEbene', post)
+        const response = await api.post('/antd/addDesign', post)
         return response.data
     }
 )
 
-const insertDesignsEbene = (state: IDesignsTreeState, responce: IDesignsAppend) => {
+const insertDesignsDesign = (state: IDesignsTreeState, responce: IDesignsAppend) => {
     if (!responce?.id) return state.designs;
-    if (!state.selected?.key || state.selected.id !== responce.gd) return state.designs;
+    if (state.selected?.key !== responce.parentKey) return state.designs;
     return mutationNode(responce.parentKey, state.designs, (node) => {
 
         node.children = node?.children || []
@@ -37,18 +38,18 @@ const insertDesignsEbene = (state: IDesignsTreeState, responce: IDesignsAppend) 
 }
 
 
-const reducerAddEbene = (builder: ActionReducerMapBuilder<IDesignsTreeState>) => {
+const reducerAddDesign = (builder: ActionReducerMapBuilder<IDesignsTreeState>) => {
 
-    builder.addCase(designsAddEbene.pending, (state: IDesignsTreeState, action) => {
+    builder.addCase(designsAddDesign.pending, (state: IDesignsTreeState, action) => {
         state.isLoading = true
         console.log('Add State: ', action)
 
-    }).addCase(designsAddEbene.fulfilled, (state: IDesignsTreeState, action) => {
+    }).addCase(designsAddDesign.fulfilled, (state: IDesignsTreeState, action) => {
         console.log('Add Sucess: ', action.payload)
-        state.designs = insertDesignsEbene(state, action.payload)
+        state.designs = insertDesignsDesign(state, action.payload)
         state.isLoading = false
 
-    }).addCase(designsAddEbene.rejected, (state: IDesignsTreeState, action) => {
+    }).addCase(designsAddDesign.rejected, (state: IDesignsTreeState, action) => {
         state.isLoading = false
         state.isError = action.payload as string
         console.log('Add Error: ', action)
@@ -56,4 +57,4 @@ const reducerAddEbene = (builder: ActionReducerMapBuilder<IDesignsTreeState>) =>
 
 }
 
-export default reducerAddEbene
+export default reducerAddDesign

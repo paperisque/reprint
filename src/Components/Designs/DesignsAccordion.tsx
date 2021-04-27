@@ -1,6 +1,6 @@
 import { Key, useMemo } from "react";
-import { IDesignTreeNode } from "../../global";
-import { IDesignsOverviewProps } from "../../types/designstree";
+import { IDesignTreeNode } from "../../types/designs";
+import { IDesignsOverviewProps } from "../../store/types/designstree";
 import { Collapse } from 'antd'
 import DesignsNodeBox from "./DesignsNodeBox";
 
@@ -48,7 +48,7 @@ const branchingEbenen = (tree: IDesignTreeNode[]) => {
 
 const reduceHeader = (ebene: IDesignTreeNode[]) => {
     return ebene.reduce<Key[]>((header, node) => {
-        header.push(node.title)
+        header.push(node.label)
         return header
     }, []).join(' | ')
 }

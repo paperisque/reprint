@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IDesignsTreeState } from '../../../types/designstree';
-import TreeNode from "primereact/components/treenode/TreeNode";
+import { IDesignsTreeState } from '../../types/designstree';
 import { AppState/* , AppThunk */ } from '../..';
-import { IDesignTreeNode } from '../../../global';
+import { IDesignTreeNode } from '../../../types/designs';
 import { Key } from 'react';
 import reducerAsyncTree from './reducerAsyncTree';
-import { mutationNode, slicename } from './sliceDesignsMutation';
+import { slicename } from './sliceDesignsMutation';
 import reducerLazyChilds from './reducerLazyChilds';
 import reducerAddEbene from './reducerAddEbene';
+import reducerAddDesign from './reducerAddDesign';
+import reducerAddRemove from './reducerRemove';
 
 
 const initialState: IDesignsTreeState = {
     isLoading: false,
     isError: null,
+    selected: null,
     expanded: [],
     designs: []
 };
@@ -25,26 +27,17 @@ export const designsTreeSlice = createSlice({
             state.expanded = action.payload
         },
 
-        selected: (state, action: PayloadAction<TreeNode | null>) => {
+        selected: (state, action: PayloadAction<IDesignTreeNode|null>) => {
             state.selected = action.payload
-        },
-
-        addesign: (state, action: PayloadAction<IDesignTreeNode>) => {
-            if (state.selected && state.designs) {
-                state.designs = mutationNode(
-                state.selected.key,
-                state.designs, (node: IDesignTreeNode) => {
-                    node.children?.push(action.payload)
-                    return node
-                })
-            }
-        },
+        }
     },
 
     extraReducers: builder => {
         reducerAsyncTree( builder )
         reducerLazyChilds( builder )
         reducerAddEbene( builder )
+        reducerAddDesign( builder )
+        reducerAddRemove( builder )
     }
 })
 

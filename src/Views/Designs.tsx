@@ -1,7 +1,7 @@
 import { Layout } from "antd"
 import { FaAdjust, FaCreditCard } from "react-icons/fa"
 import { ButtonsHeader, HeaderDashboard } from "../Components/Tools/Header"
-import { IButtonsTools, IEventTreeSelected } from '../global';
+import { IButtonsTools, IEventTreeSelected } from '../types/global';
 import getTools from '../Components/Tools/index';
 import React, { useEffect, Key } from "react";
 import { useAppDispatch } from '../hooks';

@@ -8,8 +8,8 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { selectTreeSelected } from "../../store/reducers/DesignsTree/sliceDesignsTree";
-import { IDesignsOverviewProps } from "../../types/designstree";
-import { IDesignTreeNode } from '../../global';
+import { IDesignsOverviewProps } from "../../store/types/designstree";
+import { IDesignTreeNode } from '../../types/designs';
 
 export default function DesignsTree({
     treeData, expanded, setSelected }: IDesignsOverviewProps) {

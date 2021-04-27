@@ -2,7 +2,8 @@ import {
     selectTreeSelected
 } from '../../../store/reducers/DesignsTree/sliceDesignsTree';
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { IDesignTreeNode, PropsAddButton } from '../../../global';
+import { IDesignTreeNode } from '../../../types/designs';
+import { PropsAddButton } from '../../../types/global';
 import { Button, Tooltip } from "antd"
 import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';

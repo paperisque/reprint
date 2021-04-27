@@ -1,8 +1,9 @@
-import { IButtonsTools } from "../../../global";
+import { IButtonsTools } from "../../../types/global";
 import Themer from "../Themer";
 import DesignsMode from './DesignsMode';
 import AddDesign from "./AddDesign";
 import AddEbene from './AddEbene';
+import DeleteObject from "./DeleteObject";
 
 export const firstButtonsDesignTools = (): IButtonsTools[] => {
     return [
@@ -17,6 +18,7 @@ export const centerButtonsDesignTools = (): IButtonsTools[] => {
     return [
         { node: AddEbene },
         { node: AddDesign },
+        { node: DeleteObject },
         
     ]
 }

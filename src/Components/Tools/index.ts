@@ -1,6 +1,6 @@
 import Themer from "./Themer";
 import { centerButtonsDesignTools, firstButtonsDesignTools } from './Designs'
-import { IButtonsTools } from "../../global";
+import { IButtonsTools } from "../../types/global";
 
 interface IButtonsBlockTools {
     firstButtonsTools:IButtonsTools[]
