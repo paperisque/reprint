@@ -41,10 +41,12 @@ export const designsTreeSlice = createSlice({
     }
 })
 
-export const { expand, selected } = designsTreeSlice.actions;
+//export const { expand, selected } = designsTreeSlice.actions;
 export const selectTreeDesign = (state: AppState) => state.designstree.designs;
 export const selectTreeOrigen = (state: AppState) => state.designstree.origen;
 export const selectTreeExpanded = (state: AppState) => state.designstree.expanded;
 export const selectTreeSelected = (state: AppState) => state.designstree.selected;
+
+//export const reducer: Reducer<IDesignsTreeState, AppState> = designsTreeSlice.reducer
 
 export default designsTreeSlice.reducer;

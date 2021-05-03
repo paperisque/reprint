@@ -9,23 +9,23 @@ export default function AddEbene() {
 
     const disabled = (selected: IDesignTreeNode) => {
         return !selected
-             || selected?.leaf === false
-             || selected?.isChild
-             || selected?.hasChilds
-             
+            || selected?.leaf === false
+            || selected?.isChild
+            || selected?.hasChilds
     }
 
     return (
-        <AddButton 
+        <AddButton
             title="Add Ebene"
             isDisabled={disabled}
             icon={<FaDatabase />}
+            key="add_ebene"
             __key="add_ebene"
-            action={(e, selected ) => {
+            action={(e, selected) => {
                 console.log('start add ebene')
-                designsAddEbeneActions( selected )
+                designsAddEbeneActions(selected)
             }}
         />
-        
+
     )
 }

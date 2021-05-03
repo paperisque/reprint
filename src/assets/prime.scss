@@ -7,7 +7,7 @@
 
 #design-prime-tree {
 
-    >.p-tree-container{
+    >.p-tree-container {
         padding: 10px 0;
     }
 
@@ -77,5 +77,20 @@
             }
         }
 
+    }
+
+    .p-tree-filter-container {
+
+        .p-tree-filter,
+        .p-tree-filter:focus {
+            
+            @extend %prevent-focused;
+            border: 2px solid #a7a3a3;
+        }
+
+        .p-tree-filter-icon {
+            right: 8px;
+            top: 15px;
+        }
     }
 }

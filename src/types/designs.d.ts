@@ -1,5 +1,4 @@
 import TreeNode from "primereact/components/treenode/TreeNode";
-
 export interface IDesignTreeNode extends TreeNode {
     id:number;
     key: string;

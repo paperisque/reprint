@@ -2,6 +2,7 @@ import { Typography } from "antd"
 import { IDesignTreeNode } from "../../types/designs";
 import { FaSquare } from "react-icons/fa";
 import classname from 'classnames';
+import TreeNode from 'primereact/components/treenode/TreeNode';
 
 const ActiveTool = ({ node }: { node: IDesignTreeNode }) => {
     return (
@@ -17,7 +18,8 @@ const ActiveTool = ({ node }: { node: IDesignTreeNode }) => {
     )
 }
 
-const DesignsNodeBox = (node: IDesignTreeNode) => {
+const DesignsNodeBox = (node: IDesignTreeNode|TreeNode) => {
+    const designNode = node as IDesignTreeNode
 
     return (
         <div className="designs-node">
@@ -27,8 +29,9 @@ const DesignsNodeBox = (node: IDesignTreeNode) => {
                     {node.label}
                 </Typography.Text>
             <pre style={{ display: 'none' }}>{JSON.stringify(node)}</pre>
+            <pre style={{ display: 'none' }}>{designNode.expanded?1:0}</pre>
             <div className="designs-node-tools">
-                <ActiveTool node={node} />
+                <ActiveTool node={designNode} />
             </div>
         </div>
     )

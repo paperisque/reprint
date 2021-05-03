@@ -1,7 +1,8 @@
-import { Key, useMemo } from "react";
+import  React, { Key, useMemo } from "react";
 import DesignsNodeBox from './DesignsNodeBox';
+import connectioNode from './connectNode'
 import { useActions } from '../../hooks';
-import { ExpandedKeysType, Tree as PrimeTree } from 'primereact/tree';
+import { EventNodeParams, ExpandedKeysType, Tree } from 'primereact/tree';
 import TreeNode from "primereact/components/treenode/TreeNode";
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
@@ -10,12 +11,15 @@ import { useTypedSelector } from "../../hooks/useTypedSelector";
 import { selectTreeSelected } from "../../store/reducers/DesignsTree/sliceDesignsTree";
 import { IDesignsOverviewProps } from "../../store/types/designstree";
 import { IDesignTreeNode } from '../../types/designs';
+import { useTranslation } from "react-i18next";
 
 export default function DesignsTree({
     treeData, expanded, setSelected }: IDesignsOverviewProps) {
 
     const { designsExpandActions } = useActions()
     const { designsTreeLazyChildsActions } = useActions()
+    const { t } = useTranslation()
+    const treeRef = React.useRef<Tree>(null)
 
     const ExpandNode = (expandedKeys: Key[]) => {
         designsExpandActions(expandedKeys)
@@ -26,6 +30,7 @@ export default function DesignsTree({
     const expandedPrime = useMemo(() => {
         const fliped: ExpandedKeysType = {}
         expanded.forEach(key => { fliped[key] = true })
+        connectioNode( treeRef.current ) 
         return fliped
     }, [expanded])
 
@@ -38,8 +43,33 @@ export default function DesignsTree({
         if (selected) return selected.key
     }, [selected])
 
+    const transition = ( e: EventNodeParams ) => {
+        const nodeBox: any = {
+            node: e.originalEvent.target as Element,
+            searchops : 4
+        }
+
+        do { nodeBox.node = nodeBox.node.parentNode
+        if ( nodeBox.node === undefined ) return;
+        if ( nodeBox.node.classList.contains('p-treenode') ) break;
+        } while( nodeBox.searchops-- )
+
+        if ( nodeBox.node.classList.contains('p-treenode') ) {
+             nodeBox.node.classList.add('p-expanding')   
+             setTimeout(() => {
+                nodeBox.node.classList.remove('p-expanding')
+             }, 300 )
+        }
+        
+    }
+
+    React.useEffect(() => {
+        //
+    }, [expanded])
+
     return (
-        <PrimeTree
+        <Tree
+            ref={treeRef}
             value={primeData}
             id="design-prime-tree"
             selectionMode="single"
@@ -47,19 +77,22 @@ export default function DesignsTree({
             expandedKeys={expandedPrime}
             selectionKeys={primeSelected}
             nodeTemplate={DesignsNodeBox}
+            filterPlaceholder={t('Search')}
+            filterBy="data.name,data.childnames"
+            filter={true}
             onToggle={(e) => {
                 console.log('...toogle tree', e)
                 ExpandNode(expandedAntd(e.value))
             }}
 
-            onExpand={(e : { node: TreeNode }) => {
+            onExpand={(e : EventNodeParams) => {
                 console.log('...Expand tree', e)
                 const node = e.node as IDesignTreeNode
-                if ( e.node.children ) return true;
+                if ( e.node.children ){ transition(e); return true;}
                 else designsTreeLazyChildsActions(node)
             }}
 
-            onCollapse={(e) => {
+            onCollapse={(e: EventNodeParams) => {
                 console.log('...Collapce tree', e)
             }}
 

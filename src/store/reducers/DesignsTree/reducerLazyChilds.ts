@@ -7,7 +7,7 @@ import api from "../../../api"
 
 export const designsTreeLazyChilds = createAsyncThunk(
     slicename + '/' + DesignsActionTypes.DESIGN_TREE_LAZYCHILDS,
-    async ( expanded: IDesignTreeNode) => {
+    async ( expanded: IDesignTreeNode ) => {
         const post = { parent: expanded.id }
         const response = await api.post('/antd/lazyChilds', post)
         return response.data

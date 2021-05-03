@@ -1,6 +1,7 @@
 import { Key } from "react";
 import { IDesignTreeNode } from "../../../types/designs";
 import { IDesignsContainer, IDesignsItem } from "../../types/designstree";
+import classnames from 'classnames'
 
 export const slicename: string = 'designstree';
 
@@ -14,7 +15,7 @@ export const mapDesignTree = (
             (node: IDesignsContainer | IDesignsItem) => {
 
                 const element = 'group' in node ? node.group : node;
-
+                const classId = 'node-' + element.id;
                 const treeItem: IDesignTreeNode = {
                     active: element.activ,
                     position: element.position,
@@ -22,7 +23,8 @@ export const mapDesignTree = (
                     key: element.ins,
                     id: element.id,
                     level: level || 0,
-                    data: element
+                    data: element,
+                    className: classId
                 }
 
                 if ('group' in node) {
@@ -30,7 +32,6 @@ export const mapDesignTree = (
                     if (node.group?.expand) treeItem.expanded = true
 
                     if (node?.child && node.child.length) {
-                        treeItem.className = 'design-parent-node'
                         treeItem.hasChilds = true
                         treeItem.leaf = true
                     }
@@ -45,6 +46,10 @@ export const mapDesignTree = (
                     treeItem.leaf = true
                     treeItem.isChild = true
                 }
+
+                treeItem.className = classnames(classId, {
+                    'design-parent-node': treeItem.hasChilds
+                })
 
                 return treeItem;
 
@@ -133,3 +138,5 @@ const defaultMutation = {
 }
 
 export default defaultMutation
+
+
