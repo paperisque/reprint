@@ -18,20 +18,27 @@ const ActiveTool = ({ node }: { node: IDesignTreeNode }) => {
     )
 }
 
-const DesignsNodeBox = (node: IDesignTreeNode|TreeNode) => {
+const DesignsNodeBox = (node: IDesignTreeNode | TreeNode) => {
     const designNode = node as IDesignTreeNode
 
     return (
         <div className="designs-node">
-                <Typography.Text
-                    ellipsis={{ tooltip: node.label}}
-                    className="design-node-title">
-                    {node.label}
-                </Typography.Text>
+            <Typography.Text
+                ellipsis={{ tooltip: node.label }}
+                className="design-node-title">
+                {node.label}
+            </Typography.Text>
             <pre style={{ display: 'none' }}>{JSON.stringify(node)}</pre>
-            <pre style={{ display: 'none' }}>{designNode.expanded?1:0}</pre>
+            <pre style={{ display: 'none' }}>{designNode.expanded ? 1 : 0}</pre>
             <div className="designs-node-tools">
                 <ActiveTool node={designNode} />
+            </div>
+            <div className="connection-node">
+                <div className="connection-container">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        version="1.1">
+                    </svg>
+                </div>
             </div>
         </div>
     )

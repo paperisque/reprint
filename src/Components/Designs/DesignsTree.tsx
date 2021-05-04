@@ -1,6 +1,6 @@
 import  React, { Key, useMemo } from "react";
 import DesignsNodeBox from './DesignsNodeBox';
-import connectioNode from './connectNode'
+//import connectioNode from './connectNode'
 import { useActions } from '../../hooks';
 import { EventNodeParams, ExpandedKeysType, Tree } from 'primereact/tree';
 import TreeNode from "primereact/components/treenode/TreeNode";
@@ -27,10 +27,11 @@ export default function DesignsTree({
 
     const primeData = treeData as TreeNode[]
 
+    //React.useEffect(() => { connectioNode( treeRef.current ) }, [expanded])
+
     const expandedPrime = useMemo(() => {
         const fliped: ExpandedKeysType = {}
         expanded.forEach(key => { fliped[key] = true })
-        connectioNode( treeRef.current ) 
         return fliped
     }, [expanded])
 
@@ -62,10 +63,6 @@ export default function DesignsTree({
         }
         
     }
-
-    React.useEffect(() => {
-        //
-    }, [expanded])
 
     return (
         <Tree

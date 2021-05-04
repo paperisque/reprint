@@ -16,7 +16,7 @@ export const designsTreeLazyChilds = createAsyncThunk(
 
 const updateDesignsTree = (state: IDesignsTreeState, responce: IDesignsContainer) => {
     
-    if ( !responce?.group.id || 
+    if ( !responce?.group?.id || 
          !responce?.child?.length || !state?.designs) return state?.designs;
    
     return mutationNode( responce.group.ins, state.designs, (node) => {

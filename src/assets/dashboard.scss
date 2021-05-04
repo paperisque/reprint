@@ -131,4 +131,23 @@ $layout-padding:3vw;
             color: grey;
         }
     }
+
+    .connection-node {
+        overflow: auto;
+        position: relative;
+        display: none;
+
+        .connection-container {
+            position: absolute;
+            top: 0; left: 0;
+            svg {
+                path {
+                    fill: none;
+                    stroke: #929292;
+                    stroke-width: 2;
+                }
+            }
+        }
+    }
+
 }
